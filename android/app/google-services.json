@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "927436911538",
+    "project_id": "gimanasiomasterfit",
+    "storage_bucket": "gimanasiomasterfit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:927436911538:android:aed0f9836dfaa7a59deaab",
+        "android_client_info": {
+          "package_name": "com.mycompany.masterfit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "927436911538-funekdtd6ln5ug1akeaoqu4praaolrbf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnzi70Cso-EPdceMYY7hU343dOUNY7mBw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "927436911538-funekdtd6ln5ug1akeaoqu4praaolrbf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "927436911538-m838sdr6eos3cmt26rg0ldl7l0vcisom.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.masterfit"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
