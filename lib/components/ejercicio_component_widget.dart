@@ -134,7 +134,7 @@ class _EjercicioComponentWidgetState extends State<EjercicioComponentWidget> {
                           width: double.infinity,
                           height: 175.0,
                           autoPlay: false,
-                          looping: true,
+                          looping: false,
                           showControls: true,
                           allowFullScreen: true,
                           allowPlaybackSpeedMenu: false,

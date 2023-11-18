@@ -233,7 +233,14 @@ class _AdminHomeRutinasWidgetState extends State<AdminHomeRutinasWidget> {
                                                         .nombreRutina,
                                                     style: FlutterFlowTheme.of(
                                                             context)
-                                                        .bodyLarge,
+                                                        .bodyLarge
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          fontSize: 20.0,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
                                                   ),
                                                   Text(
                                                     listViewRutinasRecord
@@ -241,9 +248,15 @@ class _AdminHomeRutinasWidgetState extends State<AdminHomeRutinasWidget> {
                                                     textAlign: TextAlign.center,
                                                     style: FlutterFlowTheme.of(
                                                             context)
-                                                        .labelSmall,
+                                                        .labelSmall
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          fontSize: 14.0,
+                                                        ),
                                                   ),
-                                                ],
+                                                ].divide(
+                                                    SizedBox(height: 10.0)),
                                               ),
                                             ),
                                           ),

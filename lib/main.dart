@@ -130,9 +130,9 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
-      'HomeRutinas': HomeRutinasWidget(),
       'HomePage': HomePageWidget(),
       'Actividades': ActividadesWidget(),
+      'HomeRutinas': HomeRutinasWidget(),
       'HomeShop': HomeShopWidget(),
       'AdminHomeRutinas': AdminHomeRutinasWidget(),
       'perfil': PerfilWidget(),
@@ -155,14 +155,6 @@ class _NavBarPageState extends State<NavBarPage> {
         type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: FaIcon(
-              FontAwesomeIcons.dumbbell,
-              size: 22.0,
-            ),
-            label: 'Rutinas',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(
               Icons.home_outlined,
               size: 25.0,
@@ -175,6 +167,14 @@ class _NavBarPageState extends State<NavBarPage> {
               Icons.calendar_month_sharp,
             ),
             label: 'Actividades',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: FaIcon(
+              FontAwesomeIcons.dumbbell,
+              size: 22.0,
+            ),
+            label: 'Rutinas',
             tooltip: '',
           ),
           BottomNavigationBarItem(

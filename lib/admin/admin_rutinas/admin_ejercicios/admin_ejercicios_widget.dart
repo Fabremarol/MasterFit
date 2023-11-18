@@ -125,22 +125,17 @@ class _AdminEjerciciosWidgetState extends State<AdminEjerciciosWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 10.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      width: MediaQuery.sizeOf(context).width * 1.0,
+                      width: 270.0,
                       height: 80.0,
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(16.0),
-                          bottomRight: Radius.circular(16.0),
-                          topLeft: Radius.circular(0.0),
-                          topRight: Radius.circular(0.0),
-                        ),
+                        borderRadius: BorderRadius.circular(16.0),
                       ),
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
@@ -149,15 +144,14 @@ class _AdminEjerciciosWidgetState extends State<AdminEjerciciosWidget> {
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Expanded(
+                            Flexible(
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Flexible(
                                     child: Container(
-                                      width: MediaQuery.sizeOf(context).width *
-                                          1.0,
+                                      width: 150.0,
                                       height: 60.0,
                                       decoration: BoxDecoration(
                                         color: Colors.black,
@@ -183,13 +177,33 @@ class _AdminEjerciciosWidgetState extends State<AdminEjerciciosWidget> {
                                           _model.timerValue = displayTime;
                                           if (shouldUpdate) setState(() {});
                                         },
+                                        onEnded: () async {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                'Time Complated',
+                                                style: TextStyle(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                ),
+                                              ),
+                                              duration:
+                                                  Duration(milliseconds: 4000),
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondary,
+                                            ),
+                                          );
+                                        },
                                         textAlign: TextAlign.start,
                                         style: FlutterFlowTheme.of(context)
                                             .headlineSmall
                                             .override(
                                               fontFamily: 'DS Digital',
                                               color: Color(0xFF00FF4C),
-                                              fontSize: 30.0,
+                                              fontSize: 40.0,
                                               fontWeight: FontWeight.w600,
                                               useGoogleFonts: false,
                                             ),
@@ -199,129 +213,120 @@ class _AdminEjerciciosWidgetState extends State<AdminEjerciciosWidget> {
                                 ],
                               ),
                             ),
-                            Expanded(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      FFButtonWidget(
-                                        onPressed: () {
-                                          print('Button pressed ...');
-                                        },
-                                        text: '',
-                                        icon: FaIcon(
-                                          FontAwesomeIcons.play,
-                                          color: Color(0xFF016F00),
-                                          size: 15.0,
-                                        ),
-                                        options: FFButtonOptions(
-                                          width: 35.0,
-                                          height: 35.0,
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
-                                          iconPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  10.0, 0.0, 0.0, 0.0),
-                                          color: Color(0xFF2AE12F),
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmall
-                                                  .override(
-                                                    fontFamily: 'Readex Pro',
-                                                    color: Colors.white,
-                                                  ),
-                                          elevation: 3.0,
-                                          borderSide: BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                        ),
+                            Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    FFButtonWidget(
+                                      onPressed: () async {
+                                        _model.timerController.onStartTimer();
+                                      },
+                                      text: '',
+                                      icon: FaIcon(
+                                        FontAwesomeIcons.play,
+                                        color: Color(0xFF016F00),
+                                        size: 15.0,
                                       ),
-                                      FFButtonWidget(
-                                        onPressed: () {
-                                          print('Button pressed ...');
-                                        },
-                                        text: '',
-                                        icon: FaIcon(
-                                          FontAwesomeIcons.pause,
-                                          color:
-                                              FlutterFlowTheme.of(context).jet,
-                                          size: 17.0,
+                                      options: FFButtonOptions(
+                                        width: 35.0,
+                                        height: 35.0,
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 0.0),
+                                        iconPadding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                10.0, 0.0, 0.0, 0.0),
+                                        color: Color(0xFF2AE12F),
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              color: Colors.white,
+                                            ),
+                                        elevation: 3.0,
+                                        borderSide: BorderSide(
+                                          color: Colors.transparent,
+                                          width: 1.0,
                                         ),
-                                        options: FFButtonOptions(
-                                          width: 35.0,
-                                          height: 35.0,
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
-                                          iconPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  9.0, 0.0, 0.0, 0.0),
-                                          color: FlutterFlowTheme.of(context)
-                                              .battleshipGray,
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmall
-                                                  .override(
-                                                    fontFamily: 'Readex Pro',
-                                                    color: Colors.white,
-                                                  ),
-                                          elevation: 3.0,
-                                          borderSide: BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
                                       ),
-                                      FFButtonWidget(
-                                        onPressed: () {
-                                          print('Button pressed ...');
-                                        },
-                                        text: '',
-                                        icon: Icon(
-                                          Icons.restart_alt_outlined,
-                                          color: Color(0xFF995A00),
-                                          size: 18.0,
-                                        ),
-                                        options: FFButtonOptions(
-                                          width: 35.0,
-                                          height: 35.0,
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
-                                          iconPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  9.0, 0.0, 0.0, 0.0),
-                                          color: Color(0xFFFFC300),
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmall
-                                                  .override(
-                                                    fontFamily: 'Readex Pro',
-                                                    color: Colors.white,
-                                                  ),
-                                          elevation: 3.0,
-                                          borderSide: BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                        ),
+                                    ),
+                                    FFButtonWidget(
+                                      onPressed: () async {
+                                        _model.timerController.onStopTimer();
+                                      },
+                                      text: '',
+                                      icon: FaIcon(
+                                        FontAwesomeIcons.pause,
+                                        color: FlutterFlowTheme.of(context).jet,
+                                        size: 17.0,
                                       ),
-                                    ].divide(SizedBox(width: 5.0)),
-                                  ),
-                                ],
-                              ),
+                                      options: FFButtonOptions(
+                                        width: 35.0,
+                                        height: 35.0,
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 0.0),
+                                        iconPadding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                9.0, 0.0, 0.0, 0.0),
+                                        color: FlutterFlowTheme.of(context)
+                                            .battleshipGray,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              color: Colors.white,
+                                            ),
+                                        elevation: 3.0,
+                                        borderSide: BorderSide(
+                                          color: Colors.transparent,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                      ),
+                                    ),
+                                    FFButtonWidget(
+                                      onPressed: () async {
+                                        _model.timerController.onResetTimer();
+                                      },
+                                      text: '',
+                                      icon: Icon(
+                                        Icons.restart_alt_outlined,
+                                        color: Color(0xFF995A00),
+                                        size: 18.0,
+                                      ),
+                                      options: FFButtonOptions(
+                                        width: 35.0,
+                                        height: 35.0,
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 0.0),
+                                        iconPadding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                9.0, 0.0, 0.0, 0.0),
+                                        color: Color(0xFFFFC300),
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              color: Colors.white,
+                                            ),
+                                        elevation: 3.0,
+                                        borderSide: BorderSide(
+                                          color: Colors.transparent,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                      ),
+                                    ),
+                                  ].divide(SizedBox(width: 5.0)),
+                                ),
+                              ],
                             ),
                           ].divide(SizedBox(width: 10.0)),
                         ),
@@ -331,39 +336,38 @@ class _AdminEjerciciosWidgetState extends State<AdminEjerciciosWidget> {
                 ),
               ),
               Expanded(
-                child: StreamBuilder<List<EjerciciosRecord>>(
-                  stream: queryEjerciciosRecord(
-                    parent: widget.subRutinas2?.reference,
-                  ),
-                  builder: (context, snapshot) {
-                    // Customize what your widget looks like when it's loading.
-                    if (!snapshot.hasData) {
-                      return Center(
-                        child: SizedBox(
-                          width: 50.0,
-                          height: 50.0,
-                          child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              FlutterFlowTheme.of(context).fireBrick,
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                  child: StreamBuilder<List<EjerciciosRecord>>(
+                    stream: queryEjerciciosRecord(
+                      parent: widget.subRutinas2?.reference,
+                    ),
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: SizedBox(
+                            width: 50.0,
+                            height: 50.0,
+                            child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                FlutterFlowTheme.of(context).fireBrick,
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    }
-                    List<EjerciciosRecord> listViewEjerciciosRecordList =
-                        snapshot.data!;
-                    return ListView.builder(
-                      padding: EdgeInsets.zero,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      itemCount: listViewEjerciciosRecordList.length,
-                      itemBuilder: (context, listViewIndex) {
-                        final listViewEjerciciosRecord =
-                            listViewEjerciciosRecordList[listViewIndex];
-                        return Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              5.0, 5.0, 5.0, 5.0),
-                          child: InkWell(
+                        );
+                      }
+                      List<EjerciciosRecord> listViewEjerciciosRecordList =
+                          snapshot.data!;
+                      return ListView.builder(
+                        padding: EdgeInsets.zero,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemCount: listViewEjerciciosRecordList.length,
+                        itemBuilder: (context, listViewIndex) {
+                          final listViewEjerciciosRecord =
+                              listViewEjerciciosRecordList[listViewIndex];
+                          return InkWell(
                             splashColor: Colors.transparent,
                             focusColor: Colors.transparent,
                             hoverColor: Colors.transparent,
@@ -395,18 +399,17 @@ class _AdminEjerciciosWidgetState extends State<AdminEjerciciosWidget> {
                               color: Colors.transparent,
                               elevation: 3.0,
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0),
+                                borderRadius: BorderRadius.circular(0.0),
                               ),
                               child: Container(
-                                height: 80.0,
+                                height: 90.0,
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context)
                                       .primaryBackground,
-                                  borderRadius: BorderRadius.circular(8.0),
+                                  borderRadius: BorderRadius.circular(0.0),
                                   border: Border.all(
-                                    color:
-                                        FlutterFlowTheme.of(context).secondary,
-                                    width: 0.2,
+                                    color: Color(0xAF000000),
+                                    width: 0.5,
                                   ),
                                 ),
                                 child: Padding(
@@ -506,11 +509,11 @@ class _AdminEjerciciosWidgetState extends State<AdminEjerciciosWidget> {
                                 ),
                               ),
                             ),
-                          ),
-                        );
-                      },
-                    );
-                  },
+                          );
+                        },
+                      );
+                    },
+                  ),
                 ),
               ),
             ],
