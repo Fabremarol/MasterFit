@@ -427,6 +427,7 @@ class _CrearHomeRutinaWidgetState extends State<CrearHomeRutinaWidget> {
                                               .txtfldDescripcionController.text,
                                           imagen: _model.uploadedFileUrl,
                                         ));
+                                    context.safePop();
                                   },
                                   text: 'Añadir',
                                   options: FFButtonOptions(

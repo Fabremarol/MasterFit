@@ -182,8 +182,15 @@ class _BucarMedidasWidgetState extends State<BucarMedidasWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
                 child: StreamBuilder<List<UsersRecord>>(
                   stream: queryUsersRecord(
-                    queryBuilder: (usersRecord) =>
-                        usersRecord.orderBy('nMiembro'),
+                    queryBuilder: (usersRecord) => usersRecord
+                        .where(
+                          'nMiembro',
+                          isEqualTo: valueOrDefault<int>(
+                            int.tryParse(_model.textController.text),
+                            0,
+                          ),
+                        )
+                        .orderBy('display_name'),
                   ),
                   builder: (context, snapshot) {
                     // Customize what your widget looks like when it's loading.

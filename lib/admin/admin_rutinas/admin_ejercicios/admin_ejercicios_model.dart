@@ -1,5 +1,6 @@
+import '/admin/admin_rutinas/bs_editar_ejercicios/bs_editar_ejercicios_widget.dart';
+import '/admin/admin_rutinas/bs_ejercicio_component/bs_ejercicio_component_widget.dart';
 import '/backend/backend.dart';
-import '/components/ejercicio_component_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_timer.dart';

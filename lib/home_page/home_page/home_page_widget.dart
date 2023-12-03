@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -160,6 +161,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                               .override(
                                                 fontFamily: 'Readex Pro',
                                                 fontSize: 25.0,
+                                                fontWeight: FontWeight.w600,
                                               ),
                                         ),
                                         Icon(
@@ -229,6 +231,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                               .override(
                                                 fontFamily: 'Readex Pro',
                                                 fontSize: 25.0,
+                                                fontWeight: FontWeight.w600,
                                               ),
                                         ),
                                       ),
@@ -307,6 +310,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                               .override(
                                                 fontFamily: 'Readex Pro',
                                                 fontSize: 25.0,
+                                                fontWeight: FontWeight.w600,
                                               ),
                                         ),
                                         Icon(
@@ -376,6 +380,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                               .override(
                                                 fontFamily: 'Readex Pro',
                                                 fontSize: 25.0,
+                                                fontWeight: FontWeight.w600,
                                               ),
                                         ),
                                       ),
@@ -445,6 +450,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                               .override(
                                                 fontFamily: 'Readex Pro',
                                                 fontSize: 25.0,
+                                                fontWeight: FontWeight.w600,
                                               ),
                                         ),
                                       ),
@@ -462,6 +468,82 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           ),
                         ),
                       ),
+                      if (valueOrDefault<bool>(
+                          currentUserDocument?.role, false))
+                        AuthUserStreamWidget(
+                          builder: (context) => InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              context.pushNamed('HomeAdmin');
+                            },
+                            child: Container(
+                              width: MediaQuery.sizeOf(context).width * 0.95,
+                              height: MediaQuery.sizeOf(context).height * 0.9,
+                              decoration: BoxDecoration(
+                                color: Color(0x36FFFFFF),
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 4.0,
+                                    color: Color(0x33000000),
+                                    offset: Offset(0.0, 2.0),
+                                  )
+                                ],
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                              child: Stack(
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    child: Image.asset(
+                                      'assets/images/Peso.jpeg',
+                                      width: 400.0,
+                                      height: 200.0,
+                                      fit: BoxFit.fitWidth,
+                                    ),
+                                  ),
+                                  Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    20.0, 0.0, 0.0, 0.0),
+                                            child: Text(
+                                              'Administrador',
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Readex Pro',
+                                                    fontSize: 25.0,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                            ),
+                                          ),
+                                          Icon(
+                                            Icons.navigate_next,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            size: 40.0,
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
                     ],
                   ),
                 ),

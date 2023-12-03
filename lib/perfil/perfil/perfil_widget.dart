@@ -420,7 +420,7 @@ class _PerfilWidgetState extends State<PerfilWidget>
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Proxima Actividad',
+                                'Pagar Mensualidad',
                                 style: FlutterFlowTheme.of(context).bodyMedium,
                               ),
                               Icon(

@@ -466,6 +466,7 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                             displayName: _model.txtUserNameController.text,
                             nMiembro: int.tryParse(
                                 _model.txtcodigoUsuarioController.text),
+                            createdTime: getCurrentTimestamp,
                           ));
 
                       context.goNamedAuth('HomePage', context.mounted);

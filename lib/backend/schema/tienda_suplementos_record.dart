@@ -61,6 +61,11 @@ class TiendaSuplementosRecord extends FirestoreRecord {
   int get quantity => _quantity ?? 0;
   bool hasQuantity() => _quantity != null;
 
+  // "image" field.
+  String? _image;
+  String get image => _image ?? '';
+  bool hasImage() => _image != null;
+
   void _initializeFields() {
     _name = snapshotData['name'] as String?;
     _description = snapshotData['description'] as String?;
@@ -71,6 +76,7 @@ class TiendaSuplementosRecord extends FirestoreRecord {
     _onSale = snapshotData['on_sale'] as bool?;
     _salePrice = castToType<double>(snapshotData['sale_price']);
     _quantity = castToType<int>(snapshotData['quantity']);
+    _image = snapshotData['image'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -118,6 +124,7 @@ Map<String, dynamic> createTiendaSuplementosRecordData({
   bool? onSale,
   double? salePrice,
   int? quantity,
+  String? image,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -130,6 +137,7 @@ Map<String, dynamic> createTiendaSuplementosRecordData({
       'on_sale': onSale,
       'sale_price': salePrice,
       'quantity': quantity,
+      'image': image,
     }.withoutNulls,
   );
 
@@ -150,7 +158,8 @@ class TiendaSuplementosRecordDocumentEquality
         e1?.modifiedAt == e2?.modifiedAt &&
         e1?.onSale == e2?.onSale &&
         e1?.salePrice == e2?.salePrice &&
-        e1?.quantity == e2?.quantity;
+        e1?.quantity == e2?.quantity &&
+        e1?.image == e2?.image;
   }
 
   @override
@@ -163,7 +172,8 @@ class TiendaSuplementosRecordDocumentEquality
         e?.modifiedAt,
         e?.onSale,
         e?.salePrice,
-        e?.quantity
+        e?.quantity,
+        e?.image
       ]);
 
   @override

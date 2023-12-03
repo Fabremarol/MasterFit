@@ -1,3 +1,4 @@
+import '/admin/admin_rutinas/bs_editar_rutinas/bs_editar_rutinas_widget.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';

@@ -1,3 +1,4 @@
+import '/admin/admin_rutinas/bs_editar_rutinas/bs_editar_rutinas_widget.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -68,8 +69,8 @@ class _AdminHomeRutinasWidgetState extends State<AdminHomeRutinasWidget> {
               color: Colors.white,
               size: 30.0,
             ),
-            onPressed: () async {
-              context.pushNamed('HomePageAdmin');
+            onPressed: () {
+              print('IconButton pressed ...');
             },
           ),
           title: Text(
@@ -192,31 +193,65 @@ class _AdminHomeRutinasWidgetState extends State<AdminHomeRutinasWidget> {
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    15.0, 0.0, 0.0, 0.0),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          16.0),
-                                                  child: Image.network(
-                                                    listViewRutinasRecord
-                                                        .imagen,
-                                                    width: 130.0,
-                                                    height: 110.0,
-                                                    fit: BoxFit.cover,
+                                          Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Expanded(
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.black,
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                      bottomLeft:
+                                                          Radius.circular(16.0),
+                                                      bottomRight:
+                                                          Radius.circular(0.0),
+                                                      topLeft:
+                                                          Radius.circular(16.0),
+                                                      topRight:
+                                                          Radius.circular(0.0),
+                                                    ),
+                                                  ),
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          0.00, 0.00),
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(5.0, 5.0,
+                                                                5.0, 5.0),
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                        bottomLeft:
+                                                            Radius.circular(
+                                                                16.0),
+                                                        bottomRight:
+                                                            Radius.circular(
+                                                                0.0),
+                                                        topLeft:
+                                                            Radius.circular(
+                                                                16.0),
+                                                        topRight:
+                                                            Radius.circular(
+                                                                0.0),
+                                                      ),
+                                                      child: Image.network(
+                                                        listViewRutinasRecord
+                                                            .imagen,
+                                                        width: 130.0,
+                                                        height: 140.0,
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    ),
                                                   ),
                                                 ),
-                                              ],
-                                            ),
+                                              ),
+                                            ],
                                           ),
                                           Expanded(
                                             child: Padding(
@@ -237,6 +272,9 @@ class _AdminHomeRutinasWidgetState extends State<AdminHomeRutinasWidget> {
                                                         .override(
                                                           fontFamily:
                                                               'Readex Pro',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .accent4,
                                                           fontSize: 20.0,
                                                           fontWeight:
                                                               FontWeight.w600,
@@ -263,7 +301,7 @@ class _AdminHomeRutinasWidgetState extends State<AdminHomeRutinasWidget> {
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 20.0, 0.0),
+                                                    0.0, 0.0, 10.0, 0.0),
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,
                                               mainAxisAlignment:
@@ -281,21 +319,100 @@ class _AdminHomeRutinasWidgetState extends State<AdminHomeRutinasWidget> {
                                                   highlightColor:
                                                       Colors.transparent,
                                                   onTap: () async {
-                                                    context.pushNamed(
-                                                        'EditarHomeRutina');
+                                                    await showModalBottomSheet(
+                                                      isScrollControlled: true,
+                                                      backgroundColor:
+                                                          Colors.transparent,
+                                                      context: context,
+                                                      builder: (context) {
+                                                        return GestureDetector(
+                                                          onTap: () => _model
+                                                                  .unfocusNode
+                                                                  .canRequestFocus
+                                                              ? FocusScope.of(
+                                                                      context)
+                                                                  .requestFocus(
+                                                                      _model
+                                                                          .unfocusNode)
+                                                              : FocusScope.of(
+                                                                      context)
+                                                                  .unfocus(),
+                                                          child: Padding(
+                                                            padding: MediaQuery
+                                                                .viewInsetsOf(
+                                                                    context),
+                                                            child:
+                                                                BsEditarRutinasWidget(
+                                                              editarRutina:
+                                                                  listViewRutinasRecord,
+                                                            ),
+                                                          ),
+                                                        );
+                                                      },
+                                                    ).then((value) =>
+                                                        safeSetState(() {}));
                                                   },
                                                   child: Icon(
                                                     Icons.edit_note_outlined,
-                                                    color: Color(0xFF00F9FF),
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .info,
                                                     size: 26.0,
                                                   ),
                                                 ),
-                                                Icon(
-                                                  Icons.delete_forever,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .fireBrick,
-                                                  size: 24.0,
+                                                InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    var confirmDialogResponse =
+                                                        await showDialog<bool>(
+                                                              context: context,
+                                                              builder:
+                                                                  (alertDialogContext) {
+                                                                return AlertDialog(
+                                                                  title: Text(
+                                                                      'Confirmar'),
+                                                                  content: Text(
+                                                                      '¿Desea eliminar la rutina?'),
+                                                                  actions: [
+                                                                    TextButton(
+                                                                      onPressed: () => Navigator.pop(
+                                                                          alertDialogContext,
+                                                                          false),
+                                                                      child: Text(
+                                                                          'Cancelar'),
+                                                                    ),
+                                                                    TextButton(
+                                                                      onPressed: () => Navigator.pop(
+                                                                          alertDialogContext,
+                                                                          true),
+                                                                      child: Text(
+                                                                          'Confirm'),
+                                                                    ),
+                                                                  ],
+                                                                );
+                                                              },
+                                                            ) ??
+                                                            false;
+                                                    if (confirmDialogResponse) {
+                                                      await listViewRutinasRecord
+                                                          .reference
+                                                          .delete();
+                                                    }
+                                                  },
+                                                  child: Icon(
+                                                    Icons.delete_forever,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .fireBrick,
+                                                    size: 24.0,
+                                                  ),
                                                 ),
                                               ].divide(SizedBox(height: 15.0)),
                                             ),

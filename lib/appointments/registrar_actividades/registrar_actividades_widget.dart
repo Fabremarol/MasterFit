@@ -194,13 +194,26 @@ class _RegistrarActividadesWidgetState
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 10.0, 0.0),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
-                              child: Image.network(
-                                'https://images.unsplash.com/photo-1511367461989-f85a21fda167?crop=entropy&cs=srgb&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxfHxwcm9maWxlfGVufDB8fHx8MTY5NzAxNTcwNXww&ixlib=rb-4.0.3&q=85',
-                                width: 70.0,
-                                height: 70.0,
-                                fit: BoxFit.cover,
+                            child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                await ActividadesRecord.collection
+                                    .doc()
+                                    .set(createActividadesRecordData(
+                                      nombreActividad: '',
+                                    ));
+                              },
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8.0),
+                                child: Image.network(
+                                  'https://images.unsplash.com/photo-1511367461989-f85a21fda167?crop=entropy&cs=srgb&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxfHxwcm9maWxlfGVufDB8fHx8MTY5NzAxNTcwNXww&ixlib=rb-4.0.3&q=85',
+                                  width: 70.0,
+                                  height: 70.0,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           ),
@@ -239,6 +252,13 @@ class _RegistrarActividadesWidgetState
                       child: TextFormField(
                         controller: _model.textController2,
                         focusNode: _model.textFieldFocusNode2,
+                        onFieldSubmitted: (_) async {
+                          await ActividadesRecord.collection
+                              .doc()
+                              .set(createActividadesRecordData(
+                                descripcionActividad: '',
+                              ));
+                        },
                         autofocus: true,
                         obscureText: false,
                         decoration: InputDecoration(
@@ -294,6 +314,16 @@ class _RegistrarActividadesWidgetState
                               child: TextFormField(
                                 controller: _model.textController3,
                                 focusNode: _model.textFieldFocusNode3,
+                                onFieldSubmitted: (_) async {
+                                  await ActividadesRecord.collection.doc().set({
+                                    ...mapToFirestore(
+                                      {
+                                        'horarioActividad':
+                                            FieldValue.serverTimestamp(),
+                                      },
+                                    ),
+                                  });
+                                },
                                 autofocus: true,
                                 obscureText: false,
                                 decoration: InputDecoration(
@@ -348,6 +378,13 @@ class _RegistrarActividadesWidgetState
                               child: TextFormField(
                                 controller: _model.textController4,
                                 focusNode: _model.textFieldFocusNode4,
+                                onFieldSubmitted: (_) async {
+                                  await ActividadesRecord.collection
+                                      .doc()
+                                      .set(createActividadesRecordData(
+                                        intensidadActividad: '',
+                                      ));
+                                },
                                 autofocus: true,
                                 obscureText: false,
                                 decoration: InputDecoration(
@@ -401,9 +438,16 @@ class _RegistrarActividadesWidgetState
                       iconColor: FlutterFlowTheme.of(context).secondaryText,
                       weekFormat: true,
                       weekStartsMonday: true,
-                      onChange: (DateTimeRange? newSelectedDate) {
-                        setState(
-                            () => _model.calendarSelectedDay = newSelectedDate);
+                      onChange: (DateTimeRange? newSelectedDate) async {
+                        _model.calendarSelectedDay = newSelectedDate;
+
+                        await ActividadesRecord.collection
+                            .doc()
+                            .set(createActividadesRecordData(
+                              horarioActividad:
+                                  _model.calendarSelectedDay?.start,
+                            ));
+                        setState(() {});
                       },
                       titleStyle: FlutterFlowTheme.of(context).titleLarge,
                       dayOfWeekStyle: FlutterFlowTheme.of(context).labelMedium,

@@ -496,7 +496,7 @@ class _CalendarioActividadesWidgetState
                                                                           fontFamily:
                                                                               'Readex Pro',
                                                                           color:
-                                                                              Colors.black,
+                                                                              FlutterFlowTheme.of(context).white,
                                                                         ),
                                                                   ),
                                                                 ),

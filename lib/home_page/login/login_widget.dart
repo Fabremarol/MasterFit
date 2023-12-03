@@ -112,7 +112,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                       autofocus: true,
                                       obscureText: false,
                                       decoration: InputDecoration(
-                                        labelText: '   Username o Email',
+                                        labelText: '      Usuario o Correo',
                                         labelStyle: FlutterFlowTheme.of(context)
                                             .labelMedium,
                                         hintStyle: FlutterFlowTheme.of(context)
@@ -259,20 +259,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 height: 37.0,
                                 decoration: BoxDecoration(
                                   color: Color(0x00212121),
-                                ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          40.0, 0.0, 0.0, 0.0),
-                                      child: Text(
-                                        'Recordarme',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
-                                      ),
-                                    ),
-                                  ],
                                 ),
                               ),
                               Padding(

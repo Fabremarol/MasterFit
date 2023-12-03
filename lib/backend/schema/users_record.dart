@@ -46,11 +46,6 @@ class UsersRecord extends FirestoreRecord {
   String get phoneNumber => _phoneNumber ?? '';
   bool hasPhoneNumber() => _phoneNumber != null;
 
-  // "role" field.
-  bool? _role;
-  bool get role => _role ?? false;
-  bool hasRole() => _role != null;
-
   // "edad" field.
   int? _edad;
   int get edad => _edad ?? 0;
@@ -81,6 +76,16 @@ class UsersRecord extends FirestoreRecord {
   int get nMiembro => _nMiembro ?? 0;
   bool hasNMiembro() => _nMiembro != null;
 
+  // "role" field.
+  bool? _role;
+  bool get role => _role ?? false;
+  bool hasRole() => _role != null;
+
+  // "isAdmin" field.
+  bool? _isAdmin;
+  bool get isAdmin => _isAdmin ?? false;
+  bool hasIsAdmin() => _isAdmin != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -88,13 +93,14 @@ class UsersRecord extends FirestoreRecord {
     _uid = snapshotData['uid'] as String?;
     _createdTime = snapshotData['created_time'] as DateTime?;
     _phoneNumber = snapshotData['phone_number'] as String?;
-    _role = snapshotData['role'] as bool?;
     _edad = castToType<int>(snapshotData['edad']);
     _peso = castToType<double>(snapshotData['peso']);
     _grasa = castToType<double>(snapshotData['grasa']);
     _imc = castToType<double>(snapshotData['IMC']);
     _altura = castToType<double>(snapshotData['altura']);
     _nMiembro = castToType<int>(snapshotData['nMiembro']);
+    _role = snapshotData['role'] as bool?;
+    _isAdmin = snapshotData['isAdmin'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -137,13 +143,14 @@ Map<String, dynamic> createUsersRecordData({
   String? uid,
   DateTime? createdTime,
   String? phoneNumber,
-  bool? role,
   int? edad,
   double? peso,
   double? grasa,
   double? imc,
   double? altura,
   int? nMiembro,
+  bool? role,
+  bool? isAdmin,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -153,13 +160,14 @@ Map<String, dynamic> createUsersRecordData({
       'uid': uid,
       'created_time': createdTime,
       'phone_number': phoneNumber,
-      'role': role,
       'edad': edad,
       'peso': peso,
       'grasa': grasa,
       'IMC': imc,
       'altura': altura,
       'nMiembro': nMiembro,
+      'role': role,
+      'isAdmin': isAdmin,
     }.withoutNulls,
   );
 
@@ -177,13 +185,14 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.uid == e2?.uid &&
         e1?.createdTime == e2?.createdTime &&
         e1?.phoneNumber == e2?.phoneNumber &&
-        e1?.role == e2?.role &&
         e1?.edad == e2?.edad &&
         e1?.peso == e2?.peso &&
         e1?.grasa == e2?.grasa &&
         e1?.imc == e2?.imc &&
         e1?.altura == e2?.altura &&
-        e1?.nMiembro == e2?.nMiembro;
+        e1?.nMiembro == e2?.nMiembro &&
+        e1?.role == e2?.role &&
+        e1?.isAdmin == e2?.isAdmin;
   }
 
   @override
@@ -194,13 +203,14 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.uid,
         e?.createdTime,
         e?.phoneNumber,
-        e?.role,
         e?.edad,
         e?.peso,
         e?.grasa,
         e?.imc,
         e?.altura,
-        e?.nMiembro
+        e?.nMiembro,
+        e?.role,
+        e?.isAdmin
       ]);
 
   @override

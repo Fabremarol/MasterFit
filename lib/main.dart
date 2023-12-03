@@ -131,11 +131,11 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     final tabs = {
       'HomePage': HomePageWidget(),
-      'Actividades': ActividadesWidget(),
       'HomeRutinas': HomeRutinasWidget(),
+      'Actividades': ActividadesWidget(),
       'HomeShop': HomeShopWidget(),
-      'AdminHomeRutinas': AdminHomeRutinasWidget(),
       'perfil': PerfilWidget(),
+      'AdminPerfil': AdminPerfilWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -147,10 +147,10 @@ class _NavBarPageState extends State<NavBarPage> {
           _currentPage = null;
           _currentPageName = tabs.keys.toList()[i];
         }),
-        backgroundColor: Color(0xD3000000),
+        backgroundColor: Colors.black,
         selectedItemColor: FlutterFlowTheme.of(context).primary,
         unselectedItemColor: FlutterFlowTheme.of(context).alternate,
-        showSelectedLabels: false,
+        showSelectedLabels: true,
         showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[
@@ -163,18 +163,18 @@ class _NavBarPageState extends State<NavBarPage> {
             tooltip: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.calendar_month_sharp,
-            ),
-            label: 'Actividades',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
             icon: FaIcon(
               FontAwesomeIcons.dumbbell,
               size: 22.0,
             ),
             label: 'Rutinas',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.calendar_month_sharp,
+            ),
+            label: 'Actividades',
             tooltip: '',
           ),
           BottomNavigationBarItem(
@@ -187,18 +187,18 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.admin_panel_settings,
-              size: 24.0,
-            ),
-            label: 'Admin',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
               Icons.account_circle_outlined,
               size: 24.0,
             ),
             label: '__',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.admin_panel_settings,
+              size: 24.0,
+            ),
+            label: 'Admin',
             tooltip: '',
           )
         ],

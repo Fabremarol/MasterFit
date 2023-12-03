@@ -162,11 +162,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => CancelarActividadesWidget(),
         ),
         FFRoute(
-          name: 'HomePageAdmin',
-          path: '/homePageAdmin',
-          builder: (context, params) => HomePageAdminWidget(),
-        ),
-        FFRoute(
           name: 'AdministrarActividades',
           path: '/administrarActividades',
           builder: (context, params) => AdministrarActividadesWidget(),
@@ -184,19 +179,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'AdminHomeRutinas',
           path: '/adminHomeRutinas',
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'AdminHomeRutinas')
-              : AdminHomeRutinasWidget(),
+          builder: (context, params) => AdminHomeRutinasWidget(),
         ),
         FFRoute(
           name: 'CrearHomeRutina',
           path: '/crearHomeRutina',
           builder: (context, params) => CrearHomeRutinaWidget(),
-        ),
-        FFRoute(
-          name: 'EditarHomeRutina',
-          path: '/editarHomeRutina',
-          builder: (context, params) => EditarHomeRutinaWidget(),
         ),
         FFRoute(
           name: 'CrearEjercicio',
@@ -318,6 +306,23 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             entrenador: params.getParam('entrenador',
                 ParamType.DocumentReference, false, ['entrenadores']),
           ),
+        ),
+        FFRoute(
+          name: 'HomeAdmin',
+          path: '/homeAdmin',
+          builder: (context, params) => HomeAdminWidget(),
+        ),
+        FFRoute(
+          name: 'AdminPerfil',
+          path: '/adminPerfil',
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'AdminPerfil')
+              : AdminPerfilWidget(),
+        ),
+        FFRoute(
+          name: 'AdminUsuarios',
+          path: '/adminUsuarios',
+          builder: (context, params) => AdminUsuariosWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],
@@ -498,15 +503,11 @@ class FFRoute {
                 )
               : builder(context, ffParams);
           final child = appStateNotifier.loading
-              ? Center(
-                  child: SizedBox(
-                    width: 50.0,
-                    height: 50.0,
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        FlutterFlowTheme.of(context).fireBrick,
-                      ),
-                    ),
+              ? Container(
+                  color: Colors.transparent,
+                  child: Image.asset(
+                    'assets/images/Diseo_sin_ttulo_(1).png',
+                    fit: BoxFit.cover,
                   ),
                 )
               : page;

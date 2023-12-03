@@ -1,5 +1,6 @@
+import '/admin/admin_rutinas/bs_editar_ejercicios/bs_editar_ejercicios_widget.dart';
+import '/admin/admin_rutinas/bs_ejercicio_component/bs_ejercicio_component_widget.dart';
 import '/backend/backend.dart';
-import '/components/ejercicio_component_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_timer.dart';
@@ -387,8 +388,15 @@ class _AdminEjerciciosWidgetState extends State<AdminEjerciciosWidget> {
                                         : FocusScope.of(context).unfocus(),
                                     child: Padding(
                                       padding: MediaQuery.viewInsetsOf(context),
-                                      child: EjercicioComponentWidget(
-                                        subRutinas: widget.subRutinas2!,
+                                      child: BsEjercicioComponentWidget(
+                                        nombreEjercicio:
+                                            listViewEjerciciosRecord
+                                                .nombreEjercicio,
+                                        video: listViewEjerciciosRecord.video,
+                                        reps: listViewEjerciciosRecord
+                                            .repeticiones,
+                                        sets: listViewEjerciciosRecord.sets,
+                                        nombreRutina: widget.subRutinas2!,
                                       ),
                                     ),
                                   );
@@ -493,16 +501,118 @@ class _AdminEjerciciosWidgetState extends State<AdminEjerciciosWidget> {
                                           ],
                                         ),
                                       ),
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Icon(
-                                            Icons.chevron_right_sharp,
-                                            color: FlutterFlowTheme.of(context)
-                                                .white,
-                                            size: 24.0,
-                                          ),
-                                        ],
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 8.0, 0.0),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                await showModalBottomSheet(
+                                                  isScrollControlled: true,
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return GestureDetector(
+                                                      onTap: () => _model
+                                                              .unfocusNode
+                                                              .canRequestFocus
+                                                          ? FocusScope.of(
+                                                                  context)
+                                                              .requestFocus(_model
+                                                                  .unfocusNode)
+                                                          : FocusScope.of(
+                                                                  context)
+                                                              .unfocus(),
+                                                      child: Padding(
+                                                        padding: MediaQuery
+                                                            .viewInsetsOf(
+                                                                context),
+                                                        child:
+                                                            BsEditarEjerciciosWidget(
+                                                          pEditarEjercicios:
+                                                              listViewEjerciciosRecord,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                ).then((value) =>
+                                                    safeSetState(() {}));
+                                              },
+                                              child: Icon(
+                                                Icons.edit_note_outlined,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .info,
+                                                size: 25.0,
+                                              ),
+                                            ),
+                                            InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                var confirmDialogResponse =
+                                                    await showDialog<bool>(
+                                                          context: context,
+                                                          builder:
+                                                              (alertDialogContext) {
+                                                            return AlertDialog(
+                                                              title: Text(
+                                                                  'Confirmar'),
+                                                              content: Text(
+                                                                  '¿Desea eliminar el ejercicio?'),
+                                                              actions: [
+                                                                TextButton(
+                                                                  onPressed: () =>
+                                                                      Navigator.pop(
+                                                                          alertDialogContext,
+                                                                          false),
+                                                                  child: Text(
+                                                                      'Cancelar'),
+                                                                ),
+                                                                TextButton(
+                                                                  onPressed: () =>
+                                                                      Navigator.pop(
+                                                                          alertDialogContext,
+                                                                          true),
+                                                                  child: Text(
+                                                                      'Confirmar'),
+                                                                ),
+                                                              ],
+                                                            );
+                                                          },
+                                                        ) ??
+                                                        false;
+                                                if (confirmDialogResponse) {
+                                                  await listViewEjerciciosRecord
+                                                      .reference
+                                                      .delete();
+                                                } else {
+                                                  context.safePop();
+                                                }
+                                              },
+                                              child: Icon(
+                                                Icons.delete_forever,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .error,
+                                                size: 25.0,
+                                              ),
+                                            ),
+                                          ].divide(SizedBox(height: 10.0)),
+                                        ),
                                       ),
                                     ],
                                   ),
