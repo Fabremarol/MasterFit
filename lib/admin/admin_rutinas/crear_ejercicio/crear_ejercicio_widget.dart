@@ -1015,7 +1015,7 @@ class _CrearEjercicioWidgetState extends State<CrearEjercicioWidget> {
                               Expanded(
                                 child: FFButtonWidget(
                                   onPressed: () async {
-                                    context.pushNamed('AdminHomeRutinas');
+                                    context.safePop();
                                   },
                                   text: 'Volver',
                                   options: FFButtonOptions(

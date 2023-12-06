@@ -21,11 +21,6 @@ class EjerciciosRecord extends FirestoreRecord {
   String get nombreEjercicio => _nombreEjercicio ?? '';
   bool hasNombreEjercicio() => _nombreEjercicio != null;
 
-  // "categoria" field.
-  String? _categoria;
-  String get categoria => _categoria ?? '';
-  bool hasCategoria() => _categoria != null;
-
   // "parte_cuerpo" field.
   String? _parteCuerpo;
   String get parteCuerpo => _parteCuerpo ?? '';
@@ -55,7 +50,6 @@ class EjerciciosRecord extends FirestoreRecord {
 
   void _initializeFields() {
     _nombreEjercicio = snapshotData['nombreEjercicio'] as String?;
-    _categoria = snapshotData['categoria'] as String?;
     _parteCuerpo = snapshotData['parte_cuerpo'] as String?;
     _video = snapshotData['video'] as String?;
     _imagen = snapshotData['imagen'] as String?;
@@ -104,7 +98,6 @@ class EjerciciosRecord extends FirestoreRecord {
 
 Map<String, dynamic> createEjerciciosRecordData({
   String? nombreEjercicio,
-  String? categoria,
   String? parteCuerpo,
   String? video,
   String? imagen,
@@ -114,7 +107,6 @@ Map<String, dynamic> createEjerciciosRecordData({
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'nombreEjercicio': nombreEjercicio,
-      'categoria': categoria,
       'parte_cuerpo': parteCuerpo,
       'video': video,
       'imagen': imagen,
@@ -132,7 +124,6 @@ class EjerciciosRecordDocumentEquality implements Equality<EjerciciosRecord> {
   @override
   bool equals(EjerciciosRecord? e1, EjerciciosRecord? e2) {
     return e1?.nombreEjercicio == e2?.nombreEjercicio &&
-        e1?.categoria == e2?.categoria &&
         e1?.parteCuerpo == e2?.parteCuerpo &&
         e1?.video == e2?.video &&
         e1?.imagen == e2?.imagen &&
@@ -143,7 +134,6 @@ class EjerciciosRecordDocumentEquality implements Equality<EjerciciosRecord> {
   @override
   int hash(EjerciciosRecord? e) => const ListEquality().hash([
         e?.nombreEjercicio,
-        e?.categoria,
         e?.parteCuerpo,
         e?.video,
         e?.imagen,

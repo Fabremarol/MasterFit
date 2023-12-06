@@ -36,11 +36,17 @@ class ActividadesRecord extends FirestoreRecord {
   String get intensidadActividad => _intensidadActividad ?? '';
   bool hasIntensidadActividad() => _intensidadActividad != null;
 
+  // "fechaActividad" field.
+  DateTime? _fechaActividad;
+  DateTime? get fechaActividad => _fechaActividad;
+  bool hasFechaActividad() => _fechaActividad != null;
+
   void _initializeFields() {
     _nombreActividad = snapshotData['nombreActividad'] as String?;
     _descripcionActividad = snapshotData['descripcionActividad'] as String?;
     _horarioActividad = snapshotData['horarioActividad'] as DateTime?;
     _intensidadActividad = snapshotData['intensidadActividad'] as String?;
+    _fechaActividad = snapshotData['fechaActividad'] as DateTime?;
   }
 
   static CollectionReference get collection =>
@@ -82,6 +88,7 @@ Map<String, dynamic> createActividadesRecordData({
   String? descripcionActividad,
   DateTime? horarioActividad,
   String? intensidadActividad,
+  DateTime? fechaActividad,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -89,6 +96,7 @@ Map<String, dynamic> createActividadesRecordData({
       'descripcionActividad': descripcionActividad,
       'horarioActividad': horarioActividad,
       'intensidadActividad': intensidadActividad,
+      'fechaActividad': fechaActividad,
     }.withoutNulls,
   );
 
@@ -103,7 +111,8 @@ class ActividadesRecordDocumentEquality implements Equality<ActividadesRecord> {
     return e1?.nombreActividad == e2?.nombreActividad &&
         e1?.descripcionActividad == e2?.descripcionActividad &&
         e1?.horarioActividad == e2?.horarioActividad &&
-        e1?.intensidadActividad == e2?.intensidadActividad;
+        e1?.intensidadActividad == e2?.intensidadActividad &&
+        e1?.fechaActividad == e2?.fechaActividad;
   }
 
   @override
@@ -111,7 +120,8 @@ class ActividadesRecordDocumentEquality implements Equality<ActividadesRecord> {
         e?.nombreActividad,
         e?.descripcionActividad,
         e?.horarioActividad,
-        e?.intensidadActividad
+        e?.intensidadActividad,
+        e?.fechaActividad
       ]);
 
   @override

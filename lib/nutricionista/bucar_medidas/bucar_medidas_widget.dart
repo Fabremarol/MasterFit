@@ -222,7 +222,18 @@ class _BucarMedidasWidgetState extends State<BucarMedidasWidget> {
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
-                            context.pushNamed('EditarMedidas');
+                            context.pushNamed(
+                              'EditarMedidas',
+                              queryParameters: {
+                                'pasarMedidas': serializeParam(
+                                  listViewUsersRecord,
+                                  ParamType.Document,
+                                ),
+                              }.withoutNulls,
+                              extra: <String, dynamic>{
+                                'pasarMedidas': listViewUsersRecord,
+                              },
+                            );
                           },
                           child: ListTile(
                             title: Text(

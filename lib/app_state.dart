@@ -33,6 +33,12 @@ class FFAppState extends ChangeNotifier {
   void updateRutinaStruct(Function(RutinaStruct) updateFn) {
     updateFn(_rutina);
   }
+
+  bool _searchActive = false;
+  bool get searchActive => _searchActive;
+  set searchActive(bool _value) {
+    _searchActive = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

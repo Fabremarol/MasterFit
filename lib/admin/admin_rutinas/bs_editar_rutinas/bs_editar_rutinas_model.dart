@@ -20,25 +20,26 @@ class BsEditarRutinasModel extends FlutterFlowModel<BsEditarRutinasWidget> {
       FFUploadedFile(bytes: Uint8List.fromList([]));
   String uploadedFileUrl = '';
 
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode1;
-  TextEditingController? textController1;
-  String? Function(BuildContext, String?)? textController1Validator;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode2;
-  TextEditingController? textController2;
-  String? Function(BuildContext, String?)? textController2Validator;
+  // State field(s) for txtfldNombreRutina widget.
+  FocusNode? txtfldNombreRutinaFocusNode;
+  TextEditingController? txtfldNombreRutinaController;
+  String? Function(BuildContext, String?)?
+      txtfldNombreRutinaControllerValidator;
+  // State field(s) for txtfldDescripcion widget.
+  FocusNode? txtfldDescripcionFocusNode;
+  TextEditingController? txtfldDescripcionController;
+  String? Function(BuildContext, String?)? txtfldDescripcionControllerValidator;
 
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {}
 
   void dispose() {
-    textFieldFocusNode1?.dispose();
-    textController1?.dispose();
+    txtfldNombreRutinaFocusNode?.dispose();
+    txtfldNombreRutinaController?.dispose();
 
-    textFieldFocusNode2?.dispose();
-    textController2?.dispose();
+    txtfldDescripcionFocusNode?.dispose();
+    txtfldDescripcionController?.dispose();
   }
 
   /// Action blocks are added here.

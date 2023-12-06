@@ -587,7 +587,18 @@ class _BsEditarEjerciciosWidgetState extends State<BsEditarEjerciciosWidget>
                                   child: FFButtonWidget(
                                     onPressed: () async {
                                       await widget.pEditarEjercicios!.reference
-                                          .update(createEjerciciosRecordData());
+                                          .update(createEjerciciosRecordData(
+                                        nombreEjercicio:
+                                            _model.txtfldNombreController.text,
+                                        parteCuerpo: _model
+                                            .txtfldParteCuerpoController.text,
+                                        video: _model.uploadedFileUrl2,
+                                        imagen: _model.uploadedFileUrl1,
+                                        sets: int.tryParse(
+                                            _model.txtfldSetsController.text),
+                                        repeticiones: int.tryParse(
+                                            _model.txtfldRepsController.text),
+                                      ));
                                       Navigator.pop(context);
                                     },
                                     text: 'Actualizar',

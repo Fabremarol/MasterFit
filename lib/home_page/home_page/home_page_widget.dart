@@ -469,7 +469,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         ),
                       ),
                       if (valueOrDefault<bool>(
-                          currentUserDocument?.role, false))
+                              currentUserDocument?.isAdmin, false) ==
+                          true)
                         AuthUserStreamWidget(
                           builder: (context) => InkWell(
                             splashColor: Colors.transparent,
@@ -477,7 +478,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
-                              context.pushNamed('HomeAdmin');
+                              context.pushNamed('AdminPerfil');
                             },
                             child: Container(
                               width: MediaQuery.sizeOf(context).width * 0.95,

@@ -142,14 +142,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               : HomeShopWidget(),
         ),
         FFRoute(
-          name: 'Shoes',
-          path: '/shoes',
-          builder: (context, params) => ShoesWidget(),
-        ),
-        FFRoute(
           name: 'Supplements',
           path: '/supplements',
-          builder: (context, params) => SupplementsWidget(),
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'Supplements')
+              : SupplementsWidget(),
         ),
         FFRoute(
           name: 'RegistrarActividades',
@@ -197,24 +194,27 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'AdminZapatos',
-          path: '/adminZapatos',
-          builder: (context, params) => AdminZapatosWidget(),
-        ),
-        FFRoute(
           name: 'EditarZapato',
           path: '/editarZapato',
-          builder: (context, params) => EditarZapatoWidget(),
-        ),
-        FFRoute(
-          name: 'AdminSupplements',
-          path: '/adminSupplements',
-          builder: (context, params) => AdminSupplementsWidget(),
+          asyncParams: {
+            'pasarPrenda':
+                getDoc(['tiendaRopa'], TiendaRopaRecord.fromSnapshot),
+          },
+          builder: (context, params) => EditarZapatoWidget(
+            pasarPrenda: params.getParam('pasarPrenda', ParamType.Document),
+          ),
         ),
         FFRoute(
           name: 'EditarSuplemento',
           path: '/editarSuplemento',
-          builder: (context, params) => EditarSuplementoWidget(),
+          asyncParams: {
+            'pasarSuplemento': getDoc(
+                ['tiendaSuplementos'], TiendaSuplementosRecord.fromSnapshot),
+          },
+          builder: (context, params) => EditarSuplementoWidget(
+            pasarSuplemento:
+                params.getParam('pasarSuplemento', ParamType.Document),
+          ),
         ),
         FFRoute(
           name: 'AddSupplement',
@@ -272,7 +272,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'EditarMedidas',
           path: '/editarMedidas',
-          builder: (context, params) => EditarMedidasWidget(),
+          asyncParams: {
+            'pasarMedidas': getDoc(['users'], UsersRecord.fromSnapshot),
+          },
+          builder: (context, params) => EditarMedidasWidget(
+            pasarMedidas: params.getParam('pasarMedidas', ParamType.Document),
+          ),
         ),
         FFRoute(
           name: 'bucarMedidas',
@@ -315,14 +320,33 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'AdminPerfil',
           path: '/adminPerfil',
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'AdminPerfil')
-              : AdminPerfilWidget(),
+          builder: (context, params) => AdminPerfilWidget(),
+        ),
+        FFRoute(
+          name: 'AdminUsuariosTabla',
+          path: '/adminUsuariosTabla',
+          builder: (context, params) => AdminUsuariosTablaWidget(),
+        ),
+        FFRoute(
+          name: 'AdminSupplements',
+          path: '/adminSupplements',
+          builder: (context, params) => AdminSupplementsWidget(),
+        ),
+        FFRoute(
+          name: 'AdminZapatos',
+          path: '/adminZapatos',
+          builder: (context, params) => AdminZapatosWidget(),
         ),
         FFRoute(
           name: 'AdminUsuarios',
           path: '/adminUsuarios',
           builder: (context, params) => AdminUsuariosWidget(),
+        ),
+        FFRoute(
+          name: 'Shoes',
+          path: '/shoes',
+          builder: (context, params) =>
+              params.isEmpty ? NavBarPage(initialPage: 'Shoes') : ShoesWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

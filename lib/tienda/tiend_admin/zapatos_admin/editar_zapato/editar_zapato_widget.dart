@@ -1,8 +1,12 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,7 +15,12 @@ import 'editar_zapato_model.dart';
 export 'editar_zapato_model.dart';
 
 class EditarZapatoWidget extends StatefulWidget {
-  const EditarZapatoWidget({Key? key}) : super(key: key);
+  const EditarZapatoWidget({
+    Key? key,
+    required this.pasarPrenda,
+  }) : super(key: key);
+
+  final TiendaRopaRecord? pasarPrenda;
 
   @override
   _EditarZapatoWidgetState createState() => _EditarZapatoWidgetState();
@@ -61,43 +70,34 @@ class _EditarZapatoWidgetState extends State<EditarZapatoWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(30.0),
-          child: AppBar(
-            backgroundColor: FlutterFlowTheme.of(context).primary,
-            automaticallyImplyLeading: false,
-            leading: Align(
-              alignment: AlignmentDirectional(0.00, -1.00),
-              child: InkWell(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () async {
-                  context.safePop();
-                },
-                child: Icon(
-                  Icons.chevron_left,
-                  color: FlutterFlowTheme.of(context).secondaryText,
-                  size: 25.0,
-                ),
-              ),
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).primary,
+          automaticallyImplyLeading: false,
+          leading: FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30.0,
+            borderWidth: 1.0,
+            buttonSize: 60.0,
+            icon: Icon(
+              Icons.chevron_left,
+              color: Colors.white,
+              size: 30.0,
             ),
-            actions: [],
-            flexibleSpace: FlexibleSpaceBar(
-              title: Text(
-                'MasterFit',
-                style: FlutterFlowTheme.of(context).headlineMedium.override(
-                      fontFamily: 'Outfit',
-                      color: Colors.white,
-                      fontSize: 22.0,
-                    ),
-              ),
-              centerTitle: true,
-              expandedTitleScale: 1.0,
-            ),
-            elevation: 2.0,
+            onPressed: () async {
+              context.pop();
+            },
           ),
+          title: Text(
+            'MasterFit',
+            style: FlutterFlowTheme.of(context).headlineMedium.override(
+                  fontFamily: 'Outfit',
+                  color: Colors.white,
+                  fontSize: 22.0,
+                ),
+          ),
+          actions: [],
+          centerTitle: false,
+          elevation: 2.0,
         ),
         body: SafeArea(
           top: true,
@@ -438,8 +438,13 @@ class _EditarZapatoWidgetState extends State<EditarZapatoWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(
                           20.0, 24.0, 20.0, 30.0),
                       child: FFButtonWidget(
-                        onPressed: () {
-                          print('Button pressed ...');
+                        onPressed: () async {
+                          await widget.pasarPrenda!.reference
+                              .update(createTiendaRopaRecordData(
+                            name: _model.textController1.text,
+                            price: double.tryParse(_model.textController2.text),
+                            image: _model.uploadedFileUrl,
+                          ));
                         },
                         text: 'Actualizar Zapato',
                         options: FFButtonOptions(

@@ -13,7 +13,12 @@ import 'editar_medidas_model.dart';
 export 'editar_medidas_model.dart';
 
 class EditarMedidasWidget extends StatefulWidget {
-  const EditarMedidasWidget({Key? key}) : super(key: key);
+  const EditarMedidasWidget({
+    Key? key,
+    required this.pasarMedidas,
+  }) : super(key: key);
+
+  final UsersRecord? pasarMedidas;
 
   @override
   _EditarMedidasWidgetState createState() => _EditarMedidasWidgetState();
@@ -615,7 +620,8 @@ class _EditarMedidasWidgetState extends State<EditarMedidasWidget> {
               ),
               FFButtonWidget(
                 onPressed: () async {
-                  await currentUserReference!.update(createUsersRecordData(
+                  await widget.pasarMedidas!.reference
+                      .update(createUsersRecordData(
                     edad: int.tryParse(_model.editarEdadController.text),
                     peso: double.tryParse(_model.editaPesoController.text),
                     altura: double.tryParse(_model.editarAlturaController.text),

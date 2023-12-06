@@ -1,9 +1,8 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
+import '/perfil/editar_usuarios_admin_component/editar_usuarios_admin_component_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -103,11 +102,11 @@ class _TablaUsuariosComponentWidgetState
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                     child: Row(
-                      mainAxisSize: MainAxisSize.max,
+                      mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                          width: 350.0,
+                          width: 325.0,
                           child: TextFormField(
                             controller: _model.txtfldBuscarController,
                             focusNode: _model.txtfldBuscarFocusNode,
@@ -121,8 +120,7 @@ class _TablaUsuariosComponentWidgetState
                                   FlutterFlowTheme.of(context).labelMedium,
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
+                                  color: Colors.black,
                                   width: 1.2,
                                 ),
                                 borderRadius: BorderRadius.circular(8.0),
@@ -148,6 +146,9 @@ class _TablaUsuariosComponentWidgetState
                                 ),
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
+                              filled: true,
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
                               prefixIcon: Icon(
                                 Icons.search_sharp,
                                 color: FlutterFlowTheme.of(context).primaryText,
@@ -156,36 +157,6 @@ class _TablaUsuariosComponentWidgetState
                             style: FlutterFlowTheme.of(context).bodyMedium,
                             validator: _model.txtfldBuscarControllerValidator
                                 .asValidator(context),
-                          ),
-                        ),
-                        FFButtonWidget(
-                          onPressed: () {
-                            print('Button pressed ...');
-                          },
-                          text: 'Agregar',
-                          icon: Icon(
-                            Icons.add_circle,
-                            size: 15.0,
-                          ),
-                          options: FFButtonOptions(
-                            height: 40.0,
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                24.0, 0.0, 24.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).primary,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .override(
-                                  fontFamily: 'Readex Pro',
-                                  color: Colors.white,
-                                ),
-                            elevation: 3.0,
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
                           ),
                         ),
                       ],
@@ -211,6 +182,7 @@ class _TablaUsuariosComponentWidgetState
                             16.0, 0.0, 16.0, 0.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Expanded(
                               flex: 2,
@@ -304,6 +276,8 @@ class _TablaUsuariosComponentWidgetState
                                     16.0, 0.0, 16.0, 0.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Expanded(
                                       flex: 2,
@@ -482,30 +456,29 @@ class _TablaUsuariosComponentWidgetState
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .info,
-                                              size: 20.0,
-                                            ),
-                                            onPressed: () {
-                                              print('IconButton pressed ...');
-                                            },
-                                          ),
-                                          FlutterFlowIconButton(
-                                            borderColor: Colors.transparent,
-                                            borderRadius: 30.0,
-                                            borderWidth: 1.0,
-                                            buttonSize: 44.0,
-                                            icon: Icon(
-                                              Icons.delete_forever_sharp,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .error,
-                                              size: 20.0,
+                                              size: 25.0,
                                             ),
                                             onPressed: () async {
-                                              await authManager
-                                                  .deleteUser(context);
-
-                                              context.goNamedAuth(
-                                                  'HomePage', context.mounted);
+                                              await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                enableDrag: false,
+                                                context: context,
+                                                builder: (context) {
+                                                  return Padding(
+                                                    padding:
+                                                        MediaQuery.viewInsetsOf(
+                                                            context),
+                                                    child:
+                                                        EditarUsuariosAdminComponentWidget(
+                                                      pEditarUsuariosAdmin:
+                                                          listViewUsersRecord,
+                                                    ),
+                                                  );
+                                                },
+                                              ).then((value) =>
+                                                  safeSetState(() {}));
                                             },
                                           ),
                                         ],

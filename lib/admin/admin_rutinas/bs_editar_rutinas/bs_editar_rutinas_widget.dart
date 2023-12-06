@@ -39,13 +39,13 @@ class _BsEditarRutinasWidgetState extends State<BsEditarRutinasWidget> {
     super.initState();
     _model = createModel(context, () => BsEditarRutinasModel());
 
-    _model.textController1 ??=
+    _model.txtfldNombreRutinaController ??=
         TextEditingController(text: widget.editarRutina?.nombreRutina);
-    _model.textFieldFocusNode1 ??= FocusNode();
+    _model.txtfldNombreRutinaFocusNode ??= FocusNode();
 
-    _model.textController2 ??=
+    _model.txtfldDescripcionController ??=
         TextEditingController(text: widget.editarRutina?.descripcion);
-    _model.textFieldFocusNode2 ??= FocusNode();
+    _model.txtfldDescripcionFocusNode ??= FocusNode();
   }
 
   @override
@@ -185,8 +185,9 @@ class _BsEditarRutinasWidgetState extends State<BsEditarRutinasWidget> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 TextFormField(
-                                  controller: _model.textController1,
-                                  focusNode: _model.textFieldFocusNode1,
+                                  controller:
+                                      _model.txtfldNombreRutinaController,
+                                  focusNode: _model.txtfldNombreRutinaFocusNode,
                                   autofocus: true,
                                   obscureText: false,
                                   decoration: InputDecoration(
@@ -230,7 +231,8 @@ class _BsEditarRutinasWidgetState extends State<BsEditarRutinasWidget> {
                                   ),
                                   style:
                                       FlutterFlowTheme.of(context).bodyMedium,
-                                  validator: _model.textController1Validator
+                                  validator: _model
+                                      .txtfldNombreRutinaControllerValidator
                                       .asValidator(context),
                                 ),
                                 Padding(
@@ -241,8 +243,10 @@ class _BsEditarRutinasWidgetState extends State<BsEditarRutinasWidget> {
                                     children: [
                                       Expanded(
                                         child: TextFormField(
-                                          controller: _model.textController2,
-                                          focusNode: _model.textFieldFocusNode2,
+                                          controller: _model
+                                              .txtfldDescripcionController,
+                                          focusNode:
+                                              _model.txtfldDescripcionFocusNode,
                                           autofocus: true,
                                           obscureText: false,
                                           decoration: InputDecoration(
@@ -298,7 +302,7 @@ class _BsEditarRutinasWidgetState extends State<BsEditarRutinasWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium,
                                           validator: _model
-                                              .textController2Validator
+                                              .txtfldDescripcionControllerValidator
                                               .asValidator(context),
                                         ),
                                       ),
@@ -323,8 +327,10 @@ class _BsEditarRutinasWidgetState extends State<BsEditarRutinasWidget> {
                           onPressed: () async {
                             await widget.editarRutina!.reference
                                 .update(createRutinasRecordData(
-                              nombreRutina: _model.textController1.text,
-                              descripcion: _model.textController2.text,
+                              nombreRutina:
+                                  _model.txtfldNombreRutinaController.text,
+                              descripcion:
+                                  _model.txtfldDescripcionController.text,
                               imagen: _model.uploadedFileUrl,
                             ));
                             Navigator.pop(context);

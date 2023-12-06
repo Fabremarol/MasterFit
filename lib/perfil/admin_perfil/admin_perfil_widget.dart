@@ -1,9 +1,11 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -88,10 +90,19 @@ class _AdminPerfilWidgetState extends State<AdminPerfilWidget>
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).primary,
         automaticallyImplyLeading: false,
-        leading: Icon(
-          Icons.chevron_left,
-          color: FlutterFlowTheme.of(context).secondaryText,
-          size: 30.0,
+        leading: FlutterFlowIconButton(
+          borderColor: Colors.transparent,
+          borderRadius: 30.0,
+          borderWidth: 1.0,
+          buttonSize: 60.0,
+          icon: Icon(
+            Icons.chevron_left,
+            color: Colors.white,
+            size: 30.0,
+          ),
+          onPressed: () async {
+            context.pop();
+          },
         ),
         title: Text(
           'Administrador',
@@ -102,7 +113,7 @@ class _AdminPerfilWidgetState extends State<AdminPerfilWidget>
               ),
         ),
         actions: [],
-        centerTitle: false,
+        centerTitle: true,
         elevation: 2.0,
       ),
       body: Padding(
@@ -128,8 +139,8 @@ class _AdminPerfilWidgetState extends State<AdminPerfilWidget>
                         borderRadius: BorderRadius.circular(40.0),
                         child: Image.asset(
                           'assets/images/Captura_de_pantalla_2023-10-08_130543.png',
-                          width: 40.0,
-                          height: 40.0,
+                          width: 60.0,
+                          height: 60.0,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -233,17 +244,60 @@ class _AdminPerfilWidgetState extends State<AdminPerfilWidget>
                                       .override(
                                         fontFamily: 'Readex Pro',
                                         color: Colors.white,
-                                        fontSize: 22.0,
+                                        fontSize: 24.0,
                                       ),
                                 ),
-                                Text(
-                                  'Total',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Readex Pro',
-                                        color: Colors.white,
+                                FutureBuilder<int>(
+                                  future: queryUsersRecordCount(),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50.0,
+                                          height: 50.0,
+                                          child: CircularProgressIndicator(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              FlutterFlowTheme.of(context)
+                                                  .fireBrick,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    int richTextCount = snapshot.data!;
+                                    return RichText(
+                                      textScaleFactor: MediaQuery.of(context)
+                                          .textScaleFactor,
+                                      text: TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text: 'Total Usuarios',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primary,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                          ),
+                                          TextSpan(
+                                            text: ' : ',
+                                            style: TextStyle(),
+                                          ),
+                                          TextSpan(
+                                            text: richTextCount.toString(),
+                                            style: TextStyle(),
+                                          )
+                                        ],
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium,
                                       ),
+                                    );
+                                  },
                                 ),
                               ],
                             ),

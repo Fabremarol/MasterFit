@@ -130,12 +130,13 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
-      'HomePage': HomePageWidget(),
       'HomeRutinas': HomeRutinasWidget(),
+      'HomePage': HomePageWidget(),
       'Actividades': ActividadesWidget(),
       'HomeShop': HomeShopWidget(),
+      'Supplements': SupplementsWidget(),
       'perfil': PerfilWidget(),
-      'AdminPerfil': AdminPerfilWidget(),
+      'Shoes': ShoesWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -155,19 +156,19 @@ class _NavBarPageState extends State<NavBarPage> {
         type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home_outlined,
-              size: 25.0,
-            ),
-            label: 'Home',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
             icon: FaIcon(
               FontAwesomeIcons.dumbbell,
               size: 22.0,
             ),
             label: 'Rutinas',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home_outlined,
+              size: 25.0,
+            ),
+            label: 'Home',
             tooltip: '',
           ),
           BottomNavigationBarItem(
@@ -187,6 +188,14 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
+              Icons.home_outlined,
+              size: 24.0,
+            ),
+            label: 'Home',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
               Icons.account_circle_outlined,
               size: 24.0,
             ),
@@ -195,10 +204,10 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.admin_panel_settings,
+              Icons.home_outlined,
               size: 24.0,
             ),
-            label: 'Admin',
+            label: 'Home',
             tooltip: '',
           )
         ],

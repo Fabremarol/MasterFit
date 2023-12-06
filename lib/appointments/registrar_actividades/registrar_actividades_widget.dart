@@ -191,58 +191,6 @@ class _RegistrarActividadesWidgetState
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 10.0, 0.0),
-                            child: InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                await ActividadesRecord.collection
-                                    .doc()
-                                    .set(createActividadesRecordData(
-                                      nombreActividad: '',
-                                    ));
-                              },
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
-                                child: Image.network(
-                                  'https://images.unsplash.com/photo-1511367461989-f85a21fda167?crop=entropy&cs=srgb&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxfHxwcm9maWxlfGVufDB8fHx8MTY5NzAxNTcwNXww&ixlib=rb-4.0.3&q=85',
-                                  width: 70.0,
-                                  height: 70.0,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 10.0, 0.0),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
-                              child: Image.network(
-                                'https://images.unsplash.com/photo-1511367461989-f85a21fda167?crop=entropy&cs=srgb&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxfHxwcm9maWxlfGVufDB8fHx8MTY5NzAxNTcwNXww&ixlib=rb-4.0.3&q=85',
-                                width: 70.0,
-                                height: 70.0,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 10.0, 0.0),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
-                              child: Image.network(
-                                'https://images.unsplash.com/photo-1511367461989-f85a21fda167?crop=entropy&cs=srgb&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxfHxwcm9maWxlfGVufDB8fHx8MTY5NzAxNTcwNXww&ixlib=rb-4.0.3&q=85',
-                                width: 70.0,
-                                height: 70.0,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
                         ],
                       ),
                     ),
@@ -438,14 +386,14 @@ class _RegistrarActividadesWidgetState
                       iconColor: FlutterFlowTheme.of(context).secondaryText,
                       weekFormat: true,
                       weekStartsMonday: true,
+                      initialDate: getCurrentTimestamp,
                       onChange: (DateTimeRange? newSelectedDate) async {
                         _model.calendarSelectedDay = newSelectedDate;
 
                         await ActividadesRecord.collection
                             .doc()
                             .set(createActividadesRecordData(
-                              horarioActividad:
-                                  _model.calendarSelectedDay?.start,
+                              fechaActividad: _model.calendarSelectedDay?.start,
                             ));
                         setState(() {});
                       },
@@ -463,7 +411,19 @@ class _RegistrarActividadesWidgetState
                           EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 30.0),
                       child: FFButtonWidget(
                         onPressed: () async {
-                          context.pushNamed('CalendarioActividades');
+                          await ActividadesRecord.collection
+                              .doc()
+                              .set(createActividadesRecordData(
+                                nombreActividad: _model.textController1.text,
+                                descripcionActividad:
+                                    _model.textController2.text,
+                                horarioActividad:
+                                    _model.calendarSelectedDay?.start,
+                                intensidadActividad:
+                                    _model.textController4.text,
+                                fechaActividad:
+                                    _model.calendarSelectedDay?.start,
+                              ));
                         },
                         text: 'Registrar',
                         options: FFButtonOptions(

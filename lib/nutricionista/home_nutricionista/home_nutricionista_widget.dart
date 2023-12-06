@@ -141,7 +141,7 @@ class _HomeNutricionistaWidgetState extends State<HomeNutricionistaWidget> {
                                       hoverColor: Colors.transparent,
                                       highlightColor: Colors.transparent,
                                       onTap: () async {
-                                        context.pushNamed('Shoes');
+                                        context.pushNamed('InfoNutricionista');
                                       },
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -163,7 +163,8 @@ class _HomeNutricionistaWidgetState extends State<HomeNutricionistaWidget> {
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
-                                              context.pushNamed('Shoes');
+                                              context.pushNamed(
+                                                  'InfoNutricionista');
                                             },
                                             child: Icon(
                                               Icons.navigate_next,

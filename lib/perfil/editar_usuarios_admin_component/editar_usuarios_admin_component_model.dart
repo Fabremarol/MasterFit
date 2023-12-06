@@ -1,12 +1,16 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
+import '/backend/firebase_storage/storage.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/flutter_flow/upload_data.dart';
 import 'editar_usuarios_admin_component_widget.dart'
     show EditarUsuariosAdminComponentWidget;
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -18,14 +22,11 @@ class EditarUsuariosAdminComponentModel
     extends FlutterFlowModel<EditarUsuariosAdminComponentWidget> {
   ///  State fields for stateful widgets in this component.
 
-  // State field(s) for txtfldNombre widget.
-  FocusNode? txtfldNombreFocusNode;
-  TextEditingController? txtfldNombreController;
-  String? Function(BuildContext, String?)? txtfldNombreControllerValidator;
-  // State field(s) for txtfldCorreo widget.
-  FocusNode? txtfldCorreoFocusNode;
-  TextEditingController? txtfldCorreoController;
-  String? Function(BuildContext, String?)? txtfldCorreoControllerValidator;
+  bool isDataUploading = false;
+  FFUploadedFile uploadedLocalFile =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl = '';
+
   // State field(s) for DropDown widget.
   String? dropDownValue1;
   FormFieldController<String>? dropDownValueController1;
@@ -37,13 +38,7 @@ class EditarUsuariosAdminComponentModel
 
   void initState(BuildContext context) {}
 
-  void dispose() {
-    txtfldNombreFocusNode?.dispose();
-    txtfldNombreController?.dispose();
-
-    txtfldCorreoFocusNode?.dispose();
-    txtfldCorreoController?.dispose();
-  }
+  void dispose() {}
 
   /// Action blocks are added here.
 

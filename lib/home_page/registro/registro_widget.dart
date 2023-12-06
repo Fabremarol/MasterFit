@@ -1,8 +1,10 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/firebase_storage/storage.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/upload_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -109,14 +111,107 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(8.0),
-                    child: Image.asset(
-                      'assets/images/Captura_de_pantalla_2023-10-09_122630-removebg-preview.png',
-                      width: 300.0,
-                      height: 200.0,
-                      fit: BoxFit.contain,
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Image.asset(
+                        'assets/images/Captura_de_pantalla_2023-10-09_122630-removebg-preview.png',
+                        width: 200.0,
+                        height: 100.0,
+                        fit: BoxFit.contain,
+                      ),
                     ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Text(
+                        'Agregar Imagen.',
+                        textAlign: TextAlign.start,
+                        style: FlutterFlowTheme.of(context).bodyMedium,
+                      ),
+                      Card(
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        color: FlutterFlowTheme.of(context).primary,
+                        elevation: 4.0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            final selectedMedia =
+                                await selectMediaWithSourceBottomSheet(
+                              context: context,
+                              allowPhoto: true,
+                            );
+                            if (selectedMedia != null &&
+                                selectedMedia.every((m) => validateFileFormat(
+                                    m.storagePath, context))) {
+                              setState(() => _model.isDataUploading = true);
+                              var selectedUploadedFiles = <FFUploadedFile>[];
+
+                              var downloadUrls = <String>[];
+                              try {
+                                selectedUploadedFiles = selectedMedia
+                                    .map((m) => FFUploadedFile(
+                                          name: m.storagePath.split('/').last,
+                                          bytes: m.bytes,
+                                          height: m.dimensions?.height,
+                                          width: m.dimensions?.width,
+                                          blurHash: m.blurHash,
+                                        ))
+                                    .toList();
+
+                                downloadUrls = (await Future.wait(
+                                  selectedMedia.map(
+                                    (m) async => await uploadData(
+                                        m.storagePath, m.bytes),
+                                  ),
+                                ))
+                                    .where((u) => u != null)
+                                    .map((u) => u!)
+                                    .toList();
+                              } finally {
+                                _model.isDataUploading = false;
+                              }
+                              if (selectedUploadedFiles.length ==
+                                      selectedMedia.length &&
+                                  downloadUrls.length == selectedMedia.length) {
+                                setState(() {
+                                  _model.uploadedLocalFile =
+                                      selectedUploadedFiles.first;
+                                  _model.uploadedFileUrl = downloadUrls.first;
+                                });
+                              } else {
+                                setState(() {});
+                                return;
+                              }
+                            }
+                          },
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15.0),
+                            child: Image.asset(
+                              'assets/images/uploadpicture_122309.png',
+                              width: 146.0,
+                              height: 100.0,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -132,7 +227,6 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                         child: TextFormField(
                           controller: _model.txtEmailController,
                           focusNode: _model.txtEmailFocusNode,
-                          autofocus: true,
                           obscureText: false,
                           decoration: InputDecoration(
                             labelText: '  Ingrese su email.',
@@ -141,14 +235,14 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                             hintStyle: FlutterFlowTheme.of(context).labelMedium,
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).primary,
+                                color: FlutterFlowTheme.of(context).primaryText,
                                 width: 2.0,
                               ),
                               borderRadius: BorderRadius.circular(8.0),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).primary,
+                                color: FlutterFlowTheme.of(context).primaryText,
                                 width: 2.0,
                               ),
                               borderRadius: BorderRadius.circular(8.0),
@@ -189,7 +283,6 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                         child: TextFormField(
                           controller: _model.txtUserNameController,
                           focusNode: _model.txtUserNameFocusNode,
-                          autofocus: true,
                           obscureText: false,
                           decoration: InputDecoration(
                             labelText: '  Ingrese su nombre.',
@@ -198,14 +291,14 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                             hintStyle: FlutterFlowTheme.of(context).labelMedium,
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).primary,
+                                color: FlutterFlowTheme.of(context).primaryText,
                                 width: 2.0,
                               ),
                               borderRadius: BorderRadius.circular(8.0),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).primary,
+                                color: FlutterFlowTheme.of(context).primaryText,
                                 width: 2.0,
                               ),
                               borderRadius: BorderRadius.circular(8.0),
@@ -246,7 +339,6 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                         child: TextFormField(
                           controller: _model.txtcodigoUsuarioController,
                           focusNode: _model.txtcodigoUsuarioFocusNode,
-                          autofocus: true,
                           obscureText: false,
                           decoration: InputDecoration(
                             labelText: '  Ingrese su codigo de usuario.',
@@ -255,14 +347,14 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                             hintStyle: FlutterFlowTheme.of(context).labelMedium,
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).primary,
+                                color: FlutterFlowTheme.of(context).primaryText,
                                 width: 2.0,
                               ),
                               borderRadius: BorderRadius.circular(8.0),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).primary,
+                                color: FlutterFlowTheme.of(context).primaryText,
                                 width: 2.0,
                               ),
                               borderRadius: BorderRadius.circular(8.0),
@@ -303,7 +395,6 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                         child: TextFormField(
                           controller: _model.txtPasswordController,
                           focusNode: _model.txtPasswordFocusNode,
-                          autofocus: true,
                           obscureText: !_model.txtPasswordVisibility,
                           decoration: InputDecoration(
                             labelText: '  Contraseña.',
@@ -312,14 +403,14 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                             hintStyle: FlutterFlowTheme.of(context).labelMedium,
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).primary,
+                                color: FlutterFlowTheme.of(context).primaryText,
                                 width: 2.0,
                               ),
                               borderRadius: BorderRadius.circular(8.0),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).primary,
+                                color: FlutterFlowTheme.of(context).primaryText,
                                 width: 2.0,
                               ),
                               borderRadius: BorderRadius.circular(8.0),
@@ -373,7 +464,6 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                         child: TextFormField(
                           controller: _model.txtconfirmPasswordController,
                           focusNode: _model.txtconfirmPasswordFocusNode,
-                          autofocus: true,
                           obscureText: !_model.txtconfirmPasswordVisibility,
                           decoration: InputDecoration(
                             labelText: 'Confirmar Contraseña.',
@@ -382,14 +472,14 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                             hintStyle: FlutterFlowTheme.of(context).labelMedium,
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).primary,
+                                color: FlutterFlowTheme.of(context).primaryText,
                                 width: 2.0,
                               ),
                               borderRadius: BorderRadius.circular(8.0),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).primary,
+                                color: FlutterFlowTheme.of(context).primaryText,
                                 width: 2.0,
                               ),
                               borderRadius: BorderRadius.circular(8.0),
@@ -467,6 +557,8 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                             nMiembro: int.tryParse(
                                 _model.txtcodigoUsuarioController.text),
                             createdTime: getCurrentTimestamp,
+                            email: _model.txtEmailController.text,
+                            photoUrl: _model.uploadedFileUrl,
                           ));
 
                       context.goNamedAuth('HomePage', context.mounted);

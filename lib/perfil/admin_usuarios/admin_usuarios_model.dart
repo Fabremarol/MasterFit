@@ -1,7 +1,10 @@
+import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_autocomplete_options_list.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/perfil/tabla_usuarios_component/tabla_usuarios_component_widget.dart';
+import '/perfil/editar_usuarios_admin_component/editar_usuarios_admin_component_widget.dart';
 import 'admin_usuarios_widget.dart' show AdminUsuariosWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,19 +15,20 @@ class AdminUsuariosModel extends FlutterFlowModel<AdminUsuariosWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // Model for tablaUsuariosComponent component.
-  late TablaUsuariosComponentModel tablaUsuariosComponentModel;
+  // State field(s) for txtfldBuscar widget.
+  final txtfldBuscarKey = GlobalKey();
+  FocusNode? txtfldBuscarFocusNode;
+  TextEditingController? txtfldBuscarController;
+  String? txtfldBuscarSelectedOption;
+  String? Function(BuildContext, String?)? txtfldBuscarControllerValidator;
 
   /// Initialization and disposal methods.
 
-  void initState(BuildContext context) {
-    tablaUsuariosComponentModel =
-        createModel(context, () => TablaUsuariosComponentModel());
-  }
+  void initState(BuildContext context) {}
 
   void dispose() {
     unfocusNode.dispose();
-    tablaUsuariosComponentModel.dispose();
+    txtfldBuscarFocusNode?.dispose();
   }
 
   /// Action blocks are added here.

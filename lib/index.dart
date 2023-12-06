@@ -9,7 +9,6 @@ export '/home_page/registro/registro_widget.dart' show RegistroWidget;
 export '/appointments/calendario_actividades/calendario_actividades_widget.dart'
     show CalendarioActividadesWidget;
 export '/tienda/home_shop/home_shop_widget.dart' show HomeShopWidget;
-export '/tienda/zapatos/shoes/shoes_widget.dart' show ShoesWidget;
 export '/tienda/suplementos/supplements/supplements_widget.dart'
     show SupplementsWidget;
 export '/appointments/registrar_actividades/registrar_actividades_widget.dart'
@@ -28,12 +27,8 @@ export '/admin/admin_rutinas/crear_home_rutina/crear_home_rutina_widget.dart'
     show CrearHomeRutinaWidget;
 export '/admin/admin_rutinas/crear_ejercicio/crear_ejercicio_widget.dart'
     show CrearEjercicioWidget;
-export '/tienda/tiend_admin/zapatos_admin/admin_zapatos/admin_zapatos_widget.dart'
-    show AdminZapatosWidget;
 export '/tienda/tiend_admin/zapatos_admin/editar_zapato/editar_zapato_widget.dart'
     show EditarZapatoWidget;
-export '/tienda/tiend_admin/suplementos_admin/admin_supplements/admin_supplements_widget.dart'
-    show AdminSupplementsWidget;
 export '/tienda/tiend_admin/suplementos_admin/editar_suplemento/editar_suplemento_widget.dart'
     show EditarSuplementoWidget;
 export '/tienda/tiend_admin/suplementos_admin/add_supplement/add_supplement_widget.dart'
@@ -66,5 +61,12 @@ export '/entrenador/editar_entrenadores/editar_entrenadores_widget.dart'
     show EditarEntrenadoresWidget;
 export '/admin/home/home_admin/home_admin_widget.dart' show HomeAdminWidget;
 export '/perfil/admin_perfil/admin_perfil_widget.dart' show AdminPerfilWidget;
+export '/perfil/admin_usuarios_tabla/admin_usuarios_tabla_widget.dart'
+    show AdminUsuariosTablaWidget;
+export '/tienda/tiend_admin/suplementos_admin/admin_supplements/admin_supplements_widget.dart'
+    show AdminSupplementsWidget;
+export '/tienda/tiend_admin/zapatos_admin/admin_zapatos/admin_zapatos_widget.dart'
+    show AdminZapatosWidget;
 export '/perfil/admin_usuarios/admin_usuarios_widget.dart'
     show AdminUsuariosWidget;
+export '/tienda/zapatos/shoes/shoes_widget.dart' show ShoesWidget;
