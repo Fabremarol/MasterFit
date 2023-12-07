@@ -144,9 +144,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Supplements',
           path: '/supplements',
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'Supplements')
-              : SupplementsWidget(),
+          builder: (context, params) => SupplementsWidget(),
         ),
         FFRoute(
           name: 'RegistrarActividades',
@@ -258,16 +256,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'perfil',
-          path: '/perfil',
+          name: 'PerfilUsuario',
+          path: '/perfilUsuario',
           builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'perfil')
-              : PerfilWidget(),
-        ),
-        FFRoute(
-          name: 'EditarPerfil',
-          path: '/editarPerfil',
-          builder: (context, params) => EditarPerfilWidget(),
+              ? NavBarPage(initialPage: 'PerfilUsuario')
+              : PerfilUsuarioWidget(),
         ),
         FFRoute(
           name: 'EditarMedidas',
@@ -313,19 +306,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'HomeAdmin',
-          path: '/homeAdmin',
-          builder: (context, params) => HomeAdminWidget(),
-        ),
-        FFRoute(
           name: 'AdminPerfil',
           path: '/adminPerfil',
           builder: (context, params) => AdminPerfilWidget(),
-        ),
-        FFRoute(
-          name: 'AdminUsuariosTabla',
-          path: '/adminUsuariosTabla',
-          builder: (context, params) => AdminUsuariosTablaWidget(),
         ),
         FFRoute(
           name: 'AdminSupplements',
@@ -345,8 +328,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Shoes',
           path: '/shoes',
-          builder: (context, params) =>
-              params.isEmpty ? NavBarPage(initialPage: 'Shoes') : ShoesWidget(),
+          builder: (context, params) => ShoesWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

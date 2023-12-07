@@ -86,6 +86,16 @@ class UsersRecord extends FirestoreRecord {
   bool get isAdmin => _isAdmin ?? false;
   bool hasIsAdmin() => _isAdmin != null;
 
+  // "membresia" field.
+  bool? _membresia;
+  bool get membresia => _membresia ?? false;
+  bool hasMembresia() => _membresia != null;
+
+  // "fondoImagen" field.
+  String? _fondoImagen;
+  String get fondoImagen => _fondoImagen ?? '';
+  bool hasFondoImagen() => _fondoImagen != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -101,6 +111,8 @@ class UsersRecord extends FirestoreRecord {
     _nMiembro = castToType<int>(snapshotData['nMiembro']);
     _role = snapshotData['role'] as bool?;
     _isAdmin = snapshotData['isAdmin'] as bool?;
+    _membresia = snapshotData['membresia'] as bool?;
+    _fondoImagen = snapshotData['fondoImagen'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -151,6 +163,8 @@ Map<String, dynamic> createUsersRecordData({
   int? nMiembro,
   bool? role,
   bool? isAdmin,
+  bool? membresia,
+  String? fondoImagen,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -168,6 +182,8 @@ Map<String, dynamic> createUsersRecordData({
       'nMiembro': nMiembro,
       'role': role,
       'isAdmin': isAdmin,
+      'membresia': membresia,
+      'fondoImagen': fondoImagen,
     }.withoutNulls,
   );
 
@@ -192,7 +208,9 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.altura == e2?.altura &&
         e1?.nMiembro == e2?.nMiembro &&
         e1?.role == e2?.role &&
-        e1?.isAdmin == e2?.isAdmin;
+        e1?.isAdmin == e2?.isAdmin &&
+        e1?.membresia == e2?.membresia &&
+        e1?.fondoImagen == e2?.fondoImagen;
   }
 
   @override
@@ -210,7 +228,9 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.altura,
         e?.nMiembro,
         e?.role,
-        e?.isAdmin
+        e?.isAdmin,
+        e?.membresia,
+        e?.fondoImagen
       ]);
 
   @override

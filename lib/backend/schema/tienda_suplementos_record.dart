@@ -51,11 +51,6 @@ class TiendaSuplementosRecord extends FirestoreRecord {
   bool get onSale => _onSale ?? false;
   bool hasOnSale() => _onSale != null;
 
-  // "sale_price" field.
-  double? _salePrice;
-  double get salePrice => _salePrice ?? 0.0;
-  bool hasSalePrice() => _salePrice != null;
-
   // "quantity" field.
   int? _quantity;
   int get quantity => _quantity ?? 0;
@@ -74,7 +69,6 @@ class TiendaSuplementosRecord extends FirestoreRecord {
     _createdAt = snapshotData['created_at'] as DateTime?;
     _modifiedAt = snapshotData['modified_at'] as DateTime?;
     _onSale = snapshotData['on_sale'] as bool?;
-    _salePrice = castToType<double>(snapshotData['sale_price']);
     _quantity = castToType<int>(snapshotData['quantity']);
     _image = snapshotData['image'] as String?;
   }
@@ -122,7 +116,6 @@ Map<String, dynamic> createTiendaSuplementosRecordData({
   DateTime? createdAt,
   DateTime? modifiedAt,
   bool? onSale,
-  double? salePrice,
   int? quantity,
   String? image,
 }) {
@@ -135,7 +128,6 @@ Map<String, dynamic> createTiendaSuplementosRecordData({
       'created_at': createdAt,
       'modified_at': modifiedAt,
       'on_sale': onSale,
-      'sale_price': salePrice,
       'quantity': quantity,
       'image': image,
     }.withoutNulls,
@@ -157,7 +149,6 @@ class TiendaSuplementosRecordDocumentEquality
         e1?.createdAt == e2?.createdAt &&
         e1?.modifiedAt == e2?.modifiedAt &&
         e1?.onSale == e2?.onSale &&
-        e1?.salePrice == e2?.salePrice &&
         e1?.quantity == e2?.quantity &&
         e1?.image == e2?.image;
   }
@@ -171,7 +162,6 @@ class TiendaSuplementosRecordDocumentEquality
         e?.createdAt,
         e?.modifiedAt,
         e?.onSale,
-        e?.salePrice,
         e?.quantity,
         e?.image
       ]);

@@ -1,6 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/components/confirma_cita_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -126,57 +125,23 @@ class _BorradorhomeWidgetState extends State<BorradorhomeWidget> {
                     itemBuilder: (context, listViewIndex) {
                       final listViewReservasEntrenadorRecord =
                           listViewReservasEntrenadorRecordList[listViewIndex];
-                      return InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          await showModalBottomSheet(
-                            isScrollControlled: true,
-                            backgroundColor: Colors.transparent,
-                            enableDrag: false,
-                            context: context,
-                            builder: (context) {
-                              return GestureDetector(
-                                onTap: () => _model.unfocusNode.canRequestFocus
-                                    ? FocusScope.of(context)
-                                        .requestFocus(_model.unfocusNode)
-                                    : FocusScope.of(context).unfocus(),
-                                child: Padding(
-                                  padding: MediaQuery.viewInsetsOf(context),
-                                  child: Container(
-                                    height:
-                                        MediaQuery.sizeOf(context).height * 0.4,
-                                    child: ConfirmaCitaWidget(
-                                      confirmarCita:
-                                          listViewReservasEntrenadorRecord
-                                              .reference,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
-                          ).then((value) => safeSetState(() {}));
-                        },
-                        child: ListTile(
-                          title: Text(
-                            listViewReservasEntrenadorRecord.hora,
-                            style: FlutterFlowTheme.of(context).titleLarge,
-                          ),
-                          subtitle: Text(
-                            listViewReservasEntrenadorRecord.dia,
-                            style: FlutterFlowTheme.of(context).labelMedium,
-                          ),
-                          trailing: Icon(
-                            Icons.arrow_forward_ios,
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                            size: 20.0,
-                          ),
-                          tileColor:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          dense: false,
+                      return ListTile(
+                        title: Text(
+                          listViewReservasEntrenadorRecord.hora,
+                          style: FlutterFlowTheme.of(context).titleLarge,
                         ),
+                        subtitle: Text(
+                          listViewReservasEntrenadorRecord.dia,
+                          style: FlutterFlowTheme.of(context).labelMedium,
+                        ),
+                        trailing: Icon(
+                          Icons.arrow_forward_ios,
+                          color: FlutterFlowTheme.of(context).secondaryText,
+                          size: 20.0,
+                        ),
+                        tileColor:
+                            FlutterFlowTheme.of(context).secondaryBackground,
+                        dense: false,
                       );
                     },
                   );

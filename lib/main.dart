@@ -130,13 +130,11 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
-      'HomeRutinas': HomeRutinasWidget(),
       'HomePage': HomePageWidget(),
       'Actividades': ActividadesWidget(),
       'HomeShop': HomeShopWidget(),
-      'Supplements': SupplementsWidget(),
-      'perfil': PerfilWidget(),
-      'Shoes': ShoesWidget(),
+      'HomeRutinas': HomeRutinasWidget(),
+      'PerfilUsuario': PerfilUsuarioWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -155,14 +153,6 @@ class _NavBarPageState extends State<NavBarPage> {
         showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: FaIcon(
-              FontAwesomeIcons.dumbbell,
-              size: 22.0,
-            ),
-            label: 'Rutinas',
-            tooltip: '',
-          ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.home_outlined,
@@ -187,11 +177,11 @@ class _NavBarPageState extends State<NavBarPage> {
             tooltip: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home_outlined,
-              size: 24.0,
+            icon: FaIcon(
+              FontAwesomeIcons.dumbbell,
+              size: 22.0,
             ),
-            label: 'Home',
+            label: 'Rutinas',
             tooltip: '',
           ),
           BottomNavigationBarItem(
@@ -200,14 +190,6 @@ class _NavBarPageState extends State<NavBarPage> {
               size: 24.0,
             ),
             label: '__',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home_outlined,
-              size: 24.0,
-            ),
-            label: 'Home',
             tooltip: '',
           )
         ],

@@ -13,6 +13,8 @@ import 'schema/reservas_entrenador_record.dart';
 import 'schema/entrenadores_record.dart';
 import 'schema/ejercicios_record.dart';
 import 'schema/actividades_record.dart';
+import 'schema/reservas_actividades_record.dart';
+import 'schema/inscritos_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart';
@@ -28,6 +30,8 @@ export 'schema/reservas_entrenador_record.dart';
 export 'schema/entrenadores_record.dart';
 export 'schema/ejercicios_record.dart';
 export 'schema/actividades_record.dart';
+export 'schema/reservas_actividades_record.dart';
+export 'schema/inscritos_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -323,6 +327,83 @@ Future<List<ActividadesRecord>> queryActividadesRecordOnce({
     queryCollectionOnce(
       ActividadesRecord.collection,
       ActividadesRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query ReservasActividadesRecords (as a Stream and as a Future).
+Future<int> queryReservasActividadesRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      ReservasActividadesRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<ReservasActividadesRecord>> queryReservasActividadesRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      ReservasActividadesRecord.collection,
+      ReservasActividadesRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<ReservasActividadesRecord>> queryReservasActividadesRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      ReservasActividadesRecord.collection,
+      ReservasActividadesRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query InscritosRecords (as a Stream and as a Future).
+Future<int> queryInscritosRecordCount({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      InscritosRecord.collection(parent),
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<InscritosRecord>> queryInscritosRecord({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      InscritosRecord.collection(parent),
+      InscritosRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<InscritosRecord>> queryInscritosRecordOnce({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      InscritosRecord.collection(parent),
+      InscritosRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
