@@ -1,18 +1,3 @@
 {
-  "indexes": [
-    {
-      "collectionGroup": "users",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "nMiembro",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "display_name",
-          "order": "ASCENDING"
-        }
-      ]
-    }
-  ]
+  "indexes": []
 }
