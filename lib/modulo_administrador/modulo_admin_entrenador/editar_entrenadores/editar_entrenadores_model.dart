@@ -3,7 +3,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/modulo_entrenador/bs_editar_entrenador/bs_editar_entrenador_widget.dart';
+import '/modulo_administrador/modulo_admin_entrenador/bs_editar_entrenador/bs_editar_entrenador_widget.dart';
 import 'editar_entrenadores_widget.dart' show EditarEntrenadoresWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';

@@ -217,7 +217,7 @@ class _ActividadesWidgetState extends State<ActividadesWidget> {
                                   onPressed: () async {
                                     context.pushNamed('CalendarioActividades');
                                   },
-                                  text: 'Inscribirse',
+                                  text: 'Ver horarios',
                                   options: FFButtonOptions(
                                     width: double.infinity,
                                     height: 60.0,

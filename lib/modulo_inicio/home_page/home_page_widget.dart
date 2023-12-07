@@ -401,7 +401,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     20.0, 0.0, 0.0, 0.0),
                                             child: Text(
-                                              'Entenadores',
+                                              'Entrenadores',
                                               style: FlutterFlowTheme.of(
                                                       context)
                                                   .bodyMedium

@@ -614,6 +614,24 @@ class _AdminEjerciciosWidgetState extends State<AdminEjerciciosWidget> {
                                                   await listViewEjerciciosRecord
                                                       .reference
                                                       .delete();
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    SnackBar(
+                                                      content: Text(
+                                                        'Ejercicio eliminado correctamente!',
+                                                        style: TextStyle(
+                                                          color:
+                                                              Color(0xFF00A504),
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        ),
+                                                      ),
+                                                      duration: Duration(
+                                                          milliseconds: 4000),
+                                                      backgroundColor:
+                                                          Color(0xFF8EF1AF),
+                                                    ),
+                                                  );
                                                 } else {
                                                   context.safePop();
                                                 }

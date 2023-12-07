@@ -99,39 +99,39 @@ class _HomeShopAdminWidgetState extends State<HomeShopAdminWidget> {
                   ),
                   scrollDirection: Axis.vertical,
                   children: [
-                    Container(
-                      width: MediaQuery.sizeOf(context).width * 0.95,
-                      height: MediaQuery.sizeOf(context).height * 0.9,
-                      decoration: BoxDecoration(
-                        color: Color(0x36FFFFFF),
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Stack(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
-                            child: Image.network(
-                              'https://media.istockphoto.com/id/818706894/es/foto/lay-flat-con-ropa-deportiva-con-zapatillas-de-deporte-rastreador-de-fitness-y-deportes-botella.jpg?s=612x612&w=0&k=20&c=N3vwnYNPAmeB7uml7ggjbMIxw9PPBT7gLh4pv1FqYiw=',
-                              width: 400.0,
-                              height: 242.0,
-                              fit: BoxFit.fitWidth,
+                    InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        context.pushNamed('AdminZapatos');
+                      },
+                      child: Container(
+                        width: MediaQuery.sizeOf(context).width * 0.95,
+                        height: MediaQuery.sizeOf(context).height * 0.9,
+                        decoration: BoxDecoration(
+                          color: Color(0x36FFFFFF),
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        child: Stack(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.network(
+                                'https://media.istockphoto.com/id/818706894/es/foto/lay-flat-con-ropa-deportiva-con-zapatillas-de-deporte-rastreador-de-fitness-y-deportes-botella.jpg?s=612x612&w=0&k=20&c=N3vwnYNPAmeB7uml7ggjbMIxw9PPBT7gLh4pv1FqYiw=',
+                                width: 400.0,
+                                height: 242.0,
+                                fit: BoxFit.fitWidth,
+                              ),
                             ),
-                          ),
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    20.0, 0.0, 0.0, 0.0),
-                                child: InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    context.pushNamed('Shoes');
-                                  },
+                            Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      20.0, 0.0, 0.0, 0.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment:
@@ -146,84 +146,84 @@ class _HomeShopAdminWidgetState extends State<HomeShopAdminWidget> {
                                               fontSize: 25.0,
                                             ),
                                       ),
-                                      InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          context.pushNamed('Shoes');
-                                        },
-                                        child: Icon(
-                                          Icons.navigate_next,
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          size: 40.0,
-                                        ),
+                                      Icon(
+                                        Icons.navigate_next,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 40.0,
                                       ),
                                     ],
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      width: MediaQuery.sizeOf(context).width * 0.95,
-                      height: MediaQuery.sizeOf(context).height * 0.9,
-                      decoration: BoxDecoration(
-                        color: Color(0x36FFFFFF),
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Stack(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
-                            child: Image.network(
-                              'https://th.bing.com/th/id/OIP.fU3oJAKkrFw69gxHVMDB8QHaFt?pid=ImgDet&rs=1',
-                              width: 400.0,
-                              height: 243.0,
-                              fit: BoxFit.fitWidth,
-                            ),
-                          ),
-                          Align(
-                            alignment: AlignmentDirectional(0.00, -1.00),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          20.0, 0.0, 0.0, 0.0),
-                                      child: Text(
-                                        'Editar Suplementos',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              fontSize: 25.0,
-                                            ),
-                                      ),
-                                    ),
-                                    Icon(
-                                      Icons.navigate_next,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                      size: 40.0,
-                                    ),
-                                  ],
-                                ),
                               ],
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        context.pushNamed('AdminSupplements');
+                      },
+                      child: Container(
+                        width: MediaQuery.sizeOf(context).width * 0.95,
+                        height: MediaQuery.sizeOf(context).height * 0.9,
+                        decoration: BoxDecoration(
+                          color: Color(0x36FFFFFF),
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        child: Stack(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.network(
+                                'https://th.bing.com/th/id/OIP.fU3oJAKkrFw69gxHVMDB8QHaFt?pid=ImgDet&rs=1',
+                                width: 400.0,
+                                height: 243.0,
+                                fit: BoxFit.fitWidth,
+                              ),
+                            ),
+                            Align(
+                              alignment: AlignmentDirectional(0.00, -1.00),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            20.0, 0.0, 0.0, 0.0),
+                                        child: Text(
+                                          'Editar Suplementos',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                fontSize: 25.0,
+                                              ),
+                                        ),
+                                      ),
+                                      Icon(
+                                        Icons.navigate_next,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 40.0,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],

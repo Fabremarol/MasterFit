@@ -132,8 +132,8 @@ class _NavBarPageState extends State<NavBarPage> {
     final tabs = {
       'HomePage': HomePageWidget(),
       'Actividades': ActividadesWidget(),
-      'HomeShop': HomeShopWidget(),
       'HomeRutinas': HomeRutinasWidget(),
+      'HomeShop': HomeShopWidget(),
       'PerfilUsuario': PerfilUsuarioWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
@@ -149,7 +149,7 @@ class _NavBarPageState extends State<NavBarPage> {
         backgroundColor: Colors.black,
         selectedItemColor: FlutterFlowTheme.of(context).primary,
         unselectedItemColor: FlutterFlowTheme.of(context).alternate,
-        showSelectedLabels: true,
+        showSelectedLabels: false,
         showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[
@@ -169,19 +169,19 @@ class _NavBarPageState extends State<NavBarPage> {
             tooltip: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.shopping_bag_sharp,
-              size: 24.0,
-            ),
-            label: 'Tienda',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
             icon: FaIcon(
               FontAwesomeIcons.dumbbell,
               size: 22.0,
             ),
             label: 'Rutinas',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.shopping_bag_sharp,
+              size: 24.0,
+            ),
+            label: 'Tienda',
             tooltip: '',
           ),
           BottomNavigationBarItem(

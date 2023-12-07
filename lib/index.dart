@@ -18,7 +18,7 @@ export '/modulo_administrador/modulo_admin_actividades/registrar_actividades/reg
     show RegistrarActividadesWidget;
 export '/modulo_administrador/modulo_admin_actividades/cancelar_actividades/cancelar_actividades_widget.dart'
     show CancelarActividadesWidget;
-export '/modulo_actividades/administrar_actividades/administrar_actividades_widget.dart'
+export '/modulo_administrador/modulo_admin_actividades/administrar_actividades/administrar_actividades_widget.dart'
     show AdministrarActividadesWidget;
 export '/modulo_administrador/modulo_admin_tienda/home_shop_admin/home_shop_admin_widget.dart'
     show HomeShopAdminWidget;

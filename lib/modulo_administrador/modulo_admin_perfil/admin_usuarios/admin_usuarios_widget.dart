@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_autocomplete_options_list.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:text_search/text_search.dart';
 import 'admin_usuarios_model.dart';
 export 'admin_usuarios_model.dart';
 
@@ -166,6 +168,31 @@ class _AdminUsuariosWidgetState extends State<AdminUsuariosWidget> {
                                     controller: textEditingController,
                                     focusNode: focusNode,
                                     onEditingComplete: onEditingComplete,
+                                    onFieldSubmitted: (_) async {
+                                      await queryUsersRecordOnce()
+                                          .then(
+                                            (records) => _model
+                                                    .simpleSearchResults =
+                                                TextSearch(
+                                              records
+                                                  .map(
+                                                    (record) => TextSearchItem
+                                                        .fromTerms(record, [
+                                                      record.displayName!,
+                                                      record.uid!
+                                                    ]),
+                                                  )
+                                                  .toList(),
+                                            )
+                                                    .search(
+                                                        currentUserDisplayName)
+                                                    .map((r) => r.object)
+                                                    .toList(),
+                                          )
+                                          .onError((_, __) =>
+                                              _model.simpleSearchResults = [])
+                                          .whenComplete(() => setState(() {}));
+                                    },
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: 'Buscar usuario...',
@@ -272,105 +299,161 @@ class _AdminUsuariosWidgetState extends State<AdminUsuariosWidget> {
                           snapshot.data!;
                       return ListView.separated(
                         padding: EdgeInsets.zero,
+                        shrinkWrap: true,
                         scrollDirection: Axis.vertical,
                         itemCount: listViewUsersRecordList.length,
                         separatorBuilder: (_, __) => SizedBox(height: 5.0),
                         itemBuilder: (context, listViewIndex) {
                           final listViewUsersRecord =
                               listViewUsersRecordList[listViewIndex];
-                          return InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              await showModalBottomSheet(
-                                isScrollControlled: true,
-                                backgroundColor: Colors.transparent,
-                                enableDrag: false,
-                                context: context,
-                                builder: (context) {
-                                  return GestureDetector(
-                                    onTap: () => _model
-                                            .unfocusNode.canRequestFocus
-                                        ? FocusScope.of(context)
-                                            .requestFocus(_model.unfocusNode)
-                                        : FocusScope.of(context).unfocus(),
-                                    child: Padding(
-                                      padding: MediaQuery.viewInsetsOf(context),
-                                      child: EditarUsuariosAdminComponentWidget(
-                                        pEditarUsuariosAdmin:
-                                            listViewUsersRecord,
+                          return Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                10.0, 0.0, 10.0, 0.0),
+                            child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                await showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  backgroundColor: Colors.transparent,
+                                  enableDrag: false,
+                                  context: context,
+                                  builder: (context) {
+                                    return GestureDetector(
+                                      onTap: () => _model
+                                              .unfocusNode.canRequestFocus
+                                          ? FocusScope.of(context)
+                                              .requestFocus(_model.unfocusNode)
+                                          : FocusScope.of(context).unfocus(),
+                                      child: Padding(
+                                        padding:
+                                            MediaQuery.viewInsetsOf(context),
+                                        child:
+                                            EditarUsuariosAdminComponentWidget(
+                                          pEditarUsuariosAdmin:
+                                              listViewUsersRecord,
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                },
-                              ).then((value) => safeSetState(() {}));
-                            },
-                            child: Container(
-                              width: double.infinity,
-                              height: 100.0,
-                              decoration: BoxDecoration(
-                                color: Colors.black,
-                                boxShadow: [
-                                  BoxShadow(
-                                    blurRadius: 4.0,
-                                    color: Color(0x90000000),
-                                    offset: Offset(0.0, 2.0),
-                                  )
-                                ],
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 10.0, 10.0, 10.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Container(
-                                      width: 70.0,
-                                      height: 70.0,
-                                      clipBehavior: Clip.antiAlias,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
+                                    );
+                                  },
+                                ).then((value) => safeSetState(() {}));
+                              },
+                              child: Container(
+                                width: double.infinity,
+                                height: 100.0,
+                                decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 4.0,
+                                      color: Color(0x90000000),
+                                      offset: Offset(0.0, 2.0),
+                                    )
+                                  ],
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      10.0, 10.0, 10.0, 10.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Container(
+                                        width: 70.0,
+                                        height: 70.0,
+                                        clipBehavior: Clip.antiAlias,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Image.network(
+                                          listViewUsersRecord.photoUrl,
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
-                                      child: Image.network(
-                                        listViewUsersRecord.photoUrl,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            listViewUsersRecord.displayName,
-                                            style: FlutterFlowTheme.of(context)
-                                                .titleLarge
-                                                .override(
-                                                  fontFamily: 'Outfit',
-                                                  fontSize: 16.0,
-                                                  fontWeight: FontWeight.w600,
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            if (listViewUsersRecord.isAdmin ==
+                                                true)
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 0.0, 0.0, 2.0),
+                                                child: Text(
+                                                  'Administrador',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondary,
+                                                        fontSize: 10.0,
+                                                      ),
                                                 ),
-                                          ),
-                                          Text(
-                                            listViewUsersRecord.email,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium,
-                                          ),
-                                        ],
+                                              ),
+                                            if (listViewUsersRecord.isAdmin ==
+                                                false)
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 0.0, 0.0, 2.0),
+                                                child: Text(
+                                                  'Usuario',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondary,
+                                                        fontSize: 10.0,
+                                                      ),
+                                                ),
+                                              ),
+                                            Text(
+                                              listViewUsersRecord.displayName,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleLarge
+                                                      .override(
+                                                        fontFamily: 'Outfit',
+                                                        fontSize: 16.0,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
+                                            ),
+                                            Text(
+                                              listViewUsersRecord.nMiembro
+                                                  .toString(),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium,
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    Icon(
-                                      Icons.chevron_right_sharp,
-                                      color: FlutterFlowTheme.of(context).white,
-                                      size: 28.0,
-                                    ),
-                                  ].divide(SizedBox(width: 15.0)),
+                                      Icon(
+                                        Icons.chevron_right_sharp,
+                                        color:
+                                            FlutterFlowTheme.of(context).white,
+                                        size: 28.0,
+                                      ),
+                                    ].divide(SizedBox(width: 15.0)),
+                                  ),
                                 ),
                               ),
                             ),

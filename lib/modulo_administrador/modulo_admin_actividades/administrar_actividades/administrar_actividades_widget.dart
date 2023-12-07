@@ -250,7 +250,7 @@ class _AdministrarActividadesWidgetState
                               onPressed: () async {
                                 context.pushNamed('CancelarActividades');
                               },
-                              text: 'Ingresar',
+                              text: 'Cancelar',
                               options: FFButtonOptions(
                                 width: double.infinity,
                                 height: 60.0,

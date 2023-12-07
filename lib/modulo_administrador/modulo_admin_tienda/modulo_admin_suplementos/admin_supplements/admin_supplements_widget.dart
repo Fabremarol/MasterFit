@@ -248,17 +248,43 @@ class _AdminSupplementsWidgetState extends State<AdminSupplementsWidget> {
                                               Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
-                                                        20.0, 20.0, 20.0, 20.0),
-                                                child: Icon(
-                                                  Icons.edit_note_outlined,
-                                                  color: Color(0xFF00F9FF),
-                                                  size: 26.0,
+                                                        20.0, 20.0, 20.0, 15.0),
+                                                child: InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    context.pushNamed(
+                                                      'EditarSuplemento',
+                                                      queryParameters: {
+                                                        'pasarSuplemento':
+                                                            serializeParam(
+                                                          listViewTiendaSuplementosRecord,
+                                                          ParamType.Document,
+                                                        ),
+                                                      }.withoutNulls,
+                                                      extra: <String, dynamic>{
+                                                        'pasarSuplemento':
+                                                            listViewTiendaSuplementosRecord,
+                                                      },
+                                                    );
+                                                  },
+                                                  child: Icon(
+                                                    Icons.edit_note_outlined,
+                                                    color: Color(0xFF00F9FF),
+                                                    size: 30.0,
+                                                  ),
                                                 ),
                                               ),
                                               Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
-                                                        20.0, 20.0, 20.0, 20.0),
+                                                        20.0, 15.0, 20.0, 20.0),
                                                 child: InkWell(
                                                   splashColor:
                                                       Colors.transparent,
@@ -278,7 +304,7 @@ class _AdminSupplementsWidgetState extends State<AdminSupplementsWidget> {
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .fireBrick,
-                                                    size: 24.0,
+                                                    size: 30.0,
                                                   ),
                                                 ),
                                               ),

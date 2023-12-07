@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_autocomplete_options_list.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:text_search/text_search.dart';
 
 class AdminUsuariosModel extends FlutterFlowModel<AdminUsuariosWidget> {
   ///  State fields for stateful widgets in this page.
@@ -21,6 +23,7 @@ class AdminUsuariosModel extends FlutterFlowModel<AdminUsuariosWidget> {
   TextEditingController? txtfldBuscarController;
   String? txtfldBuscarSelectedOption;
   String? Function(BuildContext, String?)? txtfldBuscarControllerValidator;
+  List<UsersRecord> simpleSearchResults = [];
 
   /// Initialization and disposal methods.
 
